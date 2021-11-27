@@ -1,0 +1,75 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.destabilizer.idle": {
+			"loop": true,
+			"animation_length": 8.5,
+			"bones": {
+				"bone2": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"2.5": {
+							"vector": [2.5, -22.5, 100],
+							"easing": "linear"
+						},
+						"5.5": {
+							"vector": [67.5, 210, 397.5],
+							"easing": "easeInOutSine"
+						},
+						"8.5": {
+							"vector": [0, 0, 0],
+							"easing": "easeInOutSine"
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, -1, 0],
+							"easing": "easeInOutSine"
+						},
+						"1.5": {
+							"vector": [0, 1, 0],
+							"easing": "easeInOutSine"
+						},
+						"2.5": {
+							"vector": [0, -1, 0],
+							"easing": "easeInOutSine"
+						},
+						"3.5": {
+							"vector": [0, 1, 0],
+							"easing": "easeInOutSine"
+						},
+						"4.5": {
+							"vector": [0, -1, 0],
+							"easing": "easeInOutSine"
+						},
+						"5.5": {
+							"vector": [0, 1, 0],
+							"easing": "easeInOutSine"
+						},
+						"6.5": {
+							"vector": [0, -1, 0],
+							"easing": "easeInOutSine"
+						},
+						"7.5": {
+							"vector": [0, 1, 0],
+							"easing": "easeInOutSine"
+						},
+						"8.5": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						}
+					},
+					"scale": {
+						"vector": [1, 1, 1]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

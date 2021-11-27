@@ -1,7 +1,9 @@
 package com.mcarctic.btb;
 
 import com.mcarctic.btb.block.ModBlocks;
+import com.mcarctic.btb.client.renderer.tile.DestabilizerRenderer;
 import com.mcarctic.btb.item.ModItems;
+import com.mcarctic.btb.tileentity.ModTileEntities;
 import com.mcarctic.btb.world.biome.ModBiomes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -24,6 +26,8 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.example.client.renderer.tile.FertilizerTileRenderer;
+import software.bernie.example.registry.TileRegistry;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.util.stream.Collectors;
@@ -46,6 +50,7 @@ public class BeneathTheBedrock
         ModItems.register(eventBus);
         ModBiomes.register(eventBus);
         ModBlocks.register(eventBus);
+        ModTileEntities.register(eventBus);
 
 
         eventBus.addListener(this::setup);
@@ -67,9 +72,17 @@ public class BeneathTheBedrock
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
 
     }
+  /*  @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void registerRenderers(final FMLClientSetupEvent event)
+    {
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.DESTABILIZER_TILE.get(), DestabilizerRenderer::new);
+    }
 
+   */
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.DESTABILIZER_TILE.get(), DestabilizerRenderer::new);
     }
 
 
