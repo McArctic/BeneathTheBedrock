@@ -80,6 +80,8 @@ public class BeneathTheBedrock
     }
 
    */
+
+
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.DESTABILIZER_TILE.get(), DestabilizerRenderer::new);
