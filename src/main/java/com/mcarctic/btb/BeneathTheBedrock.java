@@ -1,10 +1,13 @@
 package com.mcarctic.btb;
 
 import com.mcarctic.btb.block.ModBlocks;
+import com.mcarctic.btb.client.renderer.entity.VoidCrawlerRenderer;
 import com.mcarctic.btb.client.renderer.tile.DestabilizerRenderer;
+import com.mcarctic.btb.entity.ModEntityTypes;
 import com.mcarctic.btb.item.ModItems;
 import com.mcarctic.btb.tileentity.ModTileEntities;
 import com.mcarctic.btb.world.biome.ModBiomes;
+import com.mcarctic.btb.world.structure.ModStructures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.TorchBlock;
@@ -17,6 +20,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -51,6 +55,9 @@ public class BeneathTheBedrock
         ModBiomes.register(eventBus);
         ModBlocks.register(eventBus);
         ModTileEntities.register(eventBus);
+        ModEntityTypes.register(eventBus);
+
+        ModStructures.register(eventBus);
 
 
         eventBus.addListener(this::setup);
@@ -71,20 +78,15 @@ public class BeneathTheBedrock
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
 
-    }
-  /*  @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
-    public static void registerRenderers(final FMLClientSetupEvent event)
-    {
-        ClientRegistry.bindTileEntityRenderer(ModTileEntities.DESTABILIZER_TILE.get(), DestabilizerRenderer::new);
-    }
+        ModStructures.setupStructures();
 
-   */
-
+    }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.DESTABILIZER_TILE.get(), DestabilizerRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.VOID_CRAWLER.get(), VoidCrawlerRenderer::new);
+
     }
 
 

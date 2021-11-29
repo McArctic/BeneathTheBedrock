@@ -15,6 +15,7 @@ import java.util.function.Function;
 public class VoidTeleporter implements ITeleporter {
 
     public static BlockPos thisPos = BlockPos.ZERO;
+    public static BlockPos lastPos = BlockPos.ZERO;
     public static boolean insideDimension = true;
 
     public VoidTeleporter(BlockPos pos, boolean insideDim) {
@@ -25,11 +26,15 @@ public class VoidTeleporter implements ITeleporter {
     @Override
     public Entity placeEntity(Entity entity, ServerWorld currentWorld, ServerWorld destWorld,
                               float yaw, Function<Boolean, Entity> repositionEntity) {
+
         entity = repositionEntity.apply(false);
         double y = 61;
+        if(lastPos != BlockPos.ZERO) {
+        y = lastPos.getY();
+        }
 
         if (!insideDimension) {
-            y = thisPos.getY();
+           // y = thisPos.getY();
         }
 
         BlockPos destinationPos = new BlockPos(thisPos.getX(), y, thisPos.getZ());
@@ -58,7 +63,8 @@ public class VoidTeleporter implements ITeleporter {
                 destWorld.setBlockState(destinationPos, ModBlocks.DESTABILIZER.get().getDefaultState());
             }
         }
-
+        lastPos = thisPos;
+        System.out.println("LAST POS : " + lastPos);
         return entity;
 
         }
