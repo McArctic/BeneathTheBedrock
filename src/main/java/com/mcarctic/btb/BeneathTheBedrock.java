@@ -11,7 +11,10 @@ import com.mcarctic.btb.world.structure.ModStructures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.TorchBlock;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.ParrotEntity;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -80,6 +83,10 @@ public class BeneathTheBedrock
 
         ModStructures.setupStructures();
 
+
+        //Entity
+        EntitySpawnPlacementRegistry.register(ModEntityTypes.VOID_CRAWLER.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

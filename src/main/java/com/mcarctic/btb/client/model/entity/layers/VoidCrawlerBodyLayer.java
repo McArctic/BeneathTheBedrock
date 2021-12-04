@@ -8,10 +8,10 @@ import net.minecraft.client.renderer.entity.layers.AbstractEyesLayer;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.util.ResourceLocation;
 
-public class VoidCrawlerEyesLayer<T extends MonsterEntity, M extends VoidCrawlerModel<T>> extends AbstractEyesLayer<T, M> {
-    private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(BeneathTheBedrock.MOD_ID,"textures/entity/void_crawler_eyes.png"));
+public class VoidCrawlerBodyLayer<T extends MonsterEntity, M extends VoidCrawlerModel<T>> extends AbstractEyesLayer<T, M> {
+    private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(BeneathTheBedrock.MOD_ID,"textures/entity/void_crawler_body_layer.png"));
 
-    public VoidCrawlerEyesLayer(IEntityRenderer<T, M> p_i50921_1_) {
+    public VoidCrawlerBodyLayer(IEntityRenderer<T, M> p_i50921_1_) {
         super(p_i50921_1_);
     }
 

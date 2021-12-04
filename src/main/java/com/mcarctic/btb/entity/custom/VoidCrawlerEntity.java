@@ -1,6 +1,6 @@
 package com.mcarctic.btb.entity.custom;
 
-import com.google.common.io.Closer;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
@@ -13,7 +13,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.Effect;
+import net.minecraft.pathfinding.ClimberPathNavigator;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -26,7 +27,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.Event;
 
-import java.util.Random;
 
 public class VoidCrawlerEntity extends MonsterEntity {
     private static final DataParameter<Byte> CLIMBING;
@@ -37,9 +37,9 @@ public class VoidCrawlerEntity extends MonsterEntity {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes(){
         return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH,20D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 1D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 13.0D)
+                .createMutableAttribute(Attributes.MAX_HEALTH,16D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.30000001192092896D)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 6.0D)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 25D);
     }
 
@@ -58,9 +58,30 @@ public class VoidCrawlerEntity extends MonsterEntity {
     }
 
 
-    public static AttributeModifierMap.MutableAttribute func_234305_eI_() {
-        return MonsterEntity.func_234295_eP_().createMutableAttribute(Attributes.MAX_HEALTH, 16.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.30000001192092896D);
+
+
+    @Override
+    protected PathNavigator createNavigator(World p_175447_1_) {
+        return new ClimberPathNavigator(this, p_175447_1_);
+    }
+
+
+    @Override
+    protected void registerData() {
+        super.registerData();
+        this.dataManager.register(CLIMBING, (byte)0);
+    }
+
+
+
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (!this.world.isRemote) {
+            this.setBesideClimbableBlock(this.collidedHorizontally);
+        }
+
     }
 
     @Override
@@ -87,6 +108,10 @@ public class VoidCrawlerEntity extends MonsterEntity {
     @Override
     protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
         this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+    }
+
+    public boolean isOnLadder() {
+        return this.isBesideClimbableBlock();
     }
 
 
@@ -116,6 +141,21 @@ public class VoidCrawlerEntity extends MonsterEntity {
         }
     }
 
+    public boolean isBesideClimbableBlock() {
+        return ((Byte)this.dataManager.get(CLIMBING) & 1) != 0;
+    }
+
+    public void setBesideClimbableBlock(boolean p_70839_1_) {
+        byte b0 = (Byte)this.dataManager.get(CLIMBING);
+        if (p_70839_1_) {
+            b0 = (byte)(b0 | 1);
+        } else {
+            b0 &= -2;
+        }
+
+        this.dataManager.set(CLIMBING, b0);
+    }
+
 
     @Override
     protected float getStandingEyeHeight(Pose p_213348_1_, EntitySize p_213348_2_) {
@@ -139,29 +179,9 @@ public class VoidCrawlerEntity extends MonsterEntity {
         }
     }
 
-    public static class GroupData implements ILivingEntityData {
-        public Effect effect;
-
-        public GroupData() {
-        }
-
-        public void setRandomEffect(Random p_111104_1_) {
-            int i = p_111104_1_.nextInt(5);
-            if (i <= 1) {
-                this.effect = Effects.SPEED;
-            } else if (i <= 2) {
-                this.effect = Effects.STRENGTH;
-            } else if (i <= 3) {
-                this.effect = Effects.REGENERATION;
-            } else if (i <= 4) {
-                this.effect = Effects.INVISIBILITY;
-                this.effect = Effects.INVISIBILITY;
-            }
-
-        }
-    }
 
     static class AttackGoal extends MeleeAttackGoal {
+
         public AttackGoal(VoidCrawlerEntity p_i46676_1_) {
             super(p_i46676_1_, 1.0D, true);
         }
