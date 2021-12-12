@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.world.structure.structures.DestabilizerRoomStructure;
+import com.mcarctic.btb.world.structure.structures.VoidRemnantStructure;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -26,12 +27,20 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> DESTABILIZER_ROOM =
             STRUCTURES.register("destabilizer_room", DestabilizerRoomStructure::new);
 
+
+    public static final RegistryObject<Structure<NoFeatureConfig>> VOID_REMNANT =
+            STRUCTURES.register("void_remnant", VoidRemnantStructure::new);
+
     /* average distance apart in chunks between spawn attempts */
     /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/
     /* this modifies the seed of the structure so no two structures always spawn over each-other.
     Make this large and unique. */
     public static void setupStructures() {
         setupMapSpacingAndLand(DESTABILIZER_ROOM.get(),
+                new StructureSeparationSettings(20, 5, 971241325),
+                true);
+
+        setupMapSpacingAndLand(VOID_REMNANT.get(),
                 new StructureSeparationSettings(20, 5, 971241325),
                 true);
     }

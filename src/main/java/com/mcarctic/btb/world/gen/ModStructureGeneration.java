@@ -1,5 +1,6 @@
 package com.mcarctic.btb.world.gen;
 
+import com.mcarctic.btb.world.biome.ModBiomes;
 import com.mcarctic.btb.world.structure.ModStructures;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
@@ -22,6 +23,13 @@ public class ModStructureGeneration {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
 
             structures.add(() -> ModStructures.DESTABILIZER_ROOM.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+        }
+        if(event.getName().toString().contains(ModBiomes.VOID_PLAINS.get().getRegistryName().toString())){
+
+            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+
+            structures.add(() -> ModStructures.VOID_REMNANT.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+
         }
     }
 }

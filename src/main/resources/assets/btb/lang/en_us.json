@@ -1,7 +1,11 @@
 {
   "item.btb.bedrock_pickaxe": "Bedrock Pickaxe",
+  "item.btb.void_crawler_spawn_egg": "Void Crawler Spawn Egg",
+
+  "enchantment.btb.void_vision": "Void Vision",
 
   "block.btb.void_fabric": "Void Fabric",
+  "block.btb.destabilizer": "Destabilizer",
 
-  "itemGroup.VoidTab": "Beneath The Bedrock"
+  "itemGroup.voidTab": "Beneath The Bedrock"
 }

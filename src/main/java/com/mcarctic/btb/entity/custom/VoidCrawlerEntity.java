@@ -29,6 +29,7 @@ import net.minecraftforge.eventbus.api.Event;
 
 
 public class VoidCrawlerEntity extends MonsterEntity {
+
     private static final DataParameter<Byte> CLIMBING;
 
     public VoidCrawlerEntity(EntityType<? extends VoidCrawlerEntity> p_i48550_1_, World p_i48550_2_) {
@@ -38,10 +39,11 @@ public class VoidCrawlerEntity extends MonsterEntity {
     public static AttributeModifierMap.MutableAttribute setCustomAttributes(){
         return MobEntity.func_233666_p_()
                 .createMutableAttribute(Attributes.MAX_HEALTH,16D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.30000001192092896D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.20000001192092896D)
                 .createMutableAttribute(Attributes.ATTACK_DAMAGE, 6.0D)
-                .createMutableAttribute(Attributes.FOLLOW_RANGE, 25D);
+                .createMutableAttribute(Attributes.FOLLOW_RANGE, 60D);
     }
+
 
 
     @Override
@@ -56,8 +58,6 @@ public class VoidCrawlerEntity extends MonsterEntity {
         this.targetSelector.addGoal(2, new VoidCrawlerEntity.TargetGoal(this, PlayerEntity.class));
         this.targetSelector.addGoal(3, new VoidCrawlerEntity.TargetGoal(this, IronGolemEntity.class));
     }
-
-
 
 
     @Override
@@ -75,6 +75,7 @@ public class VoidCrawlerEntity extends MonsterEntity {
 
 
 
+
     @Override
     public void tick() {
         super.tick();
@@ -83,6 +84,8 @@ public class VoidCrawlerEntity extends MonsterEntity {
         }
 
     }
+
+
 
     @Override
     protected int getExperiencePoints(PlayerEntity p_70693_1_)
@@ -157,6 +160,7 @@ public class VoidCrawlerEntity extends MonsterEntity {
     }
 
 
+
     @Override
     protected float getStandingEyeHeight(Pose p_213348_1_, EntitySize p_213348_2_) {
         return 0.65F;
@@ -191,5 +195,7 @@ public class VoidCrawlerEntity extends MonsterEntity {
             return (double)(4.0F + p_179512_1_.getWidth());
         }
     }
+
 }
+
 

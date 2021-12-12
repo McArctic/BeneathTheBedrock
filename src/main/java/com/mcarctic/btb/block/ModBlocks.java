@@ -7,6 +7,7 @@ import com.mcarctic.btb.item.ModItemGroup;
 import com.mcarctic.btb.item.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.ToolType;
@@ -15,7 +16,6 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.sql.Ref;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -34,9 +34,6 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> DESTABILIZER = registerBlock("destabilizer",
             ()-> new DestabilizerBlock());
-
-
-
 
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {

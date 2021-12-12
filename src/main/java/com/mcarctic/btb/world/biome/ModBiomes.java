@@ -2,6 +2,8 @@ package com.mcarctic.btb.world.biome;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.entity.ModEntityTypes;
+import com.mcarctic.btb.world.gen.ModStructureGeneration;
+import com.mcarctic.btb.world.structure.ModStructures;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MagmaBlock;
 import net.minecraft.client.audio.BackgroundMusicTracks;
@@ -40,11 +42,10 @@ public class ModBiomes {
        // mobspawninfo$builder.withSpawner(EntityClassification.MONSTER,
           //   new MobSpawnInfo.Spawners(EntityType.BLAZE, 100, 0, 0));
           mobspawninfo$builder.withSpawner(EntityClassification.MONSTER,
-               new MobSpawnInfo.Spawners(ModEntityTypes.VOID_CRAWLER.get(), 50, -2, 100));
+               new MobSpawnInfo.Spawners(ModEntityTypes.VOID_CRAWLER.get(), 100, 0, 1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).withSurfaceBuilder(surfaceBuilder);
 
-        // biomegenerationsettings$builder.withStructure(StructureFeatures.MINESHAFT);
         // biomegenerationsettings$builder.withStructure(StructureFeatures.RUINED_PORTAL_SWAMP);
         // biomegenerationsettings$builder.withStructure(StructureFeatures.BURIED_TREASURE);
 

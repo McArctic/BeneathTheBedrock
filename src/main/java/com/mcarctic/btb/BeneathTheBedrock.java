@@ -3,6 +3,7 @@ package com.mcarctic.btb;
 import com.mcarctic.btb.block.ModBlocks;
 import com.mcarctic.btb.client.renderer.entity.VoidCrawlerRenderer;
 import com.mcarctic.btb.client.renderer.tile.DestabilizerRenderer;
+import com.mcarctic.btb.enchantment.ModEnchantments;
 import com.mcarctic.btb.entity.ModEntityTypes;
 import com.mcarctic.btb.item.ModItems;
 import com.mcarctic.btb.tileentity.ModTileEntities;
@@ -59,6 +60,7 @@ public class BeneathTheBedrock
         ModBlocks.register(eventBus);
         ModTileEntities.register(eventBus);
         ModEntityTypes.register(eventBus);
+        ModEnchantments.register(eventBus);
 
         ModStructures.register(eventBus);
 
