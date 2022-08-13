@@ -51,7 +51,7 @@ public class VoidTeleporter implements ITeleporter {
 
         entity.setPositionAndUpdate(destinationPos.getX(), destinationPos.getY(), destinationPos.getZ());
 
-        if(insideDimension){
+      if(insideDimension){
             boolean doSetBlock = true;
             for (BlockPos checkPos : BlockPos.getAllInBoxMutable(destinationPos.down(10).west(10), destinationPos.up(10).east(10))) {
                 if(destWorld.getBlockState(checkPos).getBlock() instanceof DestabilizerBlock){
@@ -63,6 +63,8 @@ public class VoidTeleporter implements ITeleporter {
                 destWorld.setBlockState(destinationPos, ModBlocks.DESTABILIZER.get().getDefaultState());
             }
         }
+
+
         lastPos = thisPos;
         System.out.println("LAST POS : " + lastPos);
         return entity;

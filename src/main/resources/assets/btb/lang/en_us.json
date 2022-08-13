@@ -7,5 +7,7 @@
   "block.btb.void_fabric": "Void Fabric",
   "block.btb.destabilizer": "Destabilizer",
 
+  "entity.btb.void_crawler": "Void Crawler",
+
   "itemGroup.voidTab": "Beneath The Bedrock"
 }

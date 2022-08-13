@@ -2,9 +2,6 @@ package com.mcarctic.btb.tileentity;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -41,4 +38,7 @@ public class DestabilizerTile extends TileEntity implements IAnimatable {
     public AnimationFactory getFactory() {
         return this.factory;
     }
+
+
 }
+
