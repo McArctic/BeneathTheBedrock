@@ -59,8 +59,6 @@ public class DestabilizerBlock extends Block {
                         ServerWorld overWorld = server.getWorld(World.OVERWORLD);
                         ServerWorld serverworld = ((ServerWorld)worldIn).getServer().getWorld(World.OVERWORLD);
 
-                     Minecraft.getInstance().player.sendChatMessage("Whats up twitch chat!");
-
                         if (overWorld != null) {
                             player.changeDimension(overWorld, new VoidTeleporter(pos, false));
                         }
@@ -68,7 +66,6 @@ public class DestabilizerBlock extends Block {
                         ServerWorld voidWorld = server.getWorld(DimensionInit.VOID_WORLD);
                         if (voidWorld != null) {
                             player.changeDimension(voidWorld, new VoidTeleporter(pos, true));
-                            Minecraft.getInstance().player.sendChatMessage("Whats up twitch chat!");
                         }
                     }
                     return ActionResultType.SUCCESS;
