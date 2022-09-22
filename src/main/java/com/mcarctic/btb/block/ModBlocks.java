@@ -3,6 +3,8 @@ package com.mcarctic.btb.block;
 import com.mcarctic.btb.BeneathTheBedrock;
 
 import com.mcarctic.btb.block.custom.DestabilizerBlock;
+import com.mcarctic.btb.block.custom.VoidFabricBlock;
+import com.mcarctic.btb.block.custom.VoidFabricTestBlock;
 import com.mcarctic.btb.item.ModItemGroup;
 import com.mcarctic.btb.item.ModItems;
 import net.minecraft.block.*;
@@ -31,6 +33,10 @@ public class ModBlocks {
                     .setRequiresTool()
                     .hardnessAndResistance(5f)
                     .sound(SoundType.CLOTH)));
+
+
+    public static final RegistryObject<Block> VOID_FABRIC_TEST = registerBlock("void_fabric_test",
+            () -> new VoidFabricTestBlock());
 
     public static final RegistryObject<Block> DESTABILIZER = registerBlock("destabilizer",
             ()-> new DestabilizerBlock());
