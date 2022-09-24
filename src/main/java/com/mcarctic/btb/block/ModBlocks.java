@@ -5,15 +5,11 @@ import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.block.custom.DestabilizerBlock;
 import com.mcarctic.btb.block.custom.VoidFabricBlock;
 import com.mcarctic.btb.block.custom.VoidFabricTestBlock;
-import com.mcarctic.btb.block.custom.VoidFabricTestBlockPart2;
 import com.mcarctic.btb.item.ModItemGroup;
 import com.mcarctic.btb.item.ModItems;
 import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -43,7 +39,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> VOID_FABRIC_TEST = registerBlock("void_fabric_test",
-           () -> new VoidFabricTestBlockPart2());
+           () -> new VoidFabricTestBlock());
 
   //  public static final RegistryObject<Block> VOID_FABRIC_TEST = registerBlock("void_fabric_test",
    //         () -> new VoidFabricTestBlock());
