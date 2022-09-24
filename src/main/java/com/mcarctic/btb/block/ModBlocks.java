@@ -5,6 +5,7 @@ import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.block.custom.DestabilizerBlock;
 import com.mcarctic.btb.block.custom.VoidFabricBlock;
 import com.mcarctic.btb.block.custom.VoidFabricTestBlock;
+import com.mcarctic.btb.block.custom.VoidFabricTestBlockPart2;
 import com.mcarctic.btb.item.ModItemGroup;
 import com.mcarctic.btb.item.ModItems;
 import net.minecraft.block.*;
@@ -27,16 +28,25 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> VOID_FABRIC = registerBlock("void_fabric",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
+            () -> new VoidFabricBlock());
+
+
+                    /*
+                    Block(AbstractBlock.Properties.create(Material.ROCK)
                     .harvestLevel(2)
                     .harvestTool(ToolType.PICKAXE)
                     .setRequiresTool()
                     .hardnessAndResistance(5f)
                     .sound(SoundType.CLOTH)));
 
+                     */
+
 
     public static final RegistryObject<Block> VOID_FABRIC_TEST = registerBlock("void_fabric_test",
-            () -> new VoidFabricTestBlock());
+           () -> new VoidFabricTestBlockPart2());
+
+  //  public static final RegistryObject<Block> VOID_FABRIC_TEST = registerBlock("void_fabric_test",
+   //         () -> new VoidFabricTestBlock());
 
     public static final RegistryObject<Block> DESTABILIZER = registerBlock("destabilizer",
             ()-> new DestabilizerBlock());
