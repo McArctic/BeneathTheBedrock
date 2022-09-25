@@ -37,31 +37,13 @@ public class ModBiomes {
 
     private  static  Biome makeVoidBiome(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale){
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
-        // DefaultBiomeFeatures.withPassiveMobs(mobspawninfo$builder);
-        // DefaultBiomeFeatures.withBatsAndHostiles(mobspawninfo$builder);
-       // mobspawninfo$builder.withSpawner(EntityClassification.MONSTER,
-          //   new MobSpawnInfo.Spawners(EntityType.BLAZE, 100, 0, 0));
+
           mobspawninfo$builder.withSpawner(EntityClassification.MONSTER,
                new MobSpawnInfo.Spawners(ModEntityTypes.VOID_CRAWLER.get(), 100, 0, 1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).withSurfaceBuilder(surfaceBuilder);
 
-        // biomegenerationsettings$builder.withStructure(StructureFeatures.RUINED_PORTAL_SWAMP);
-        // biomegenerationsettings$builder.withStructure(StructureFeatures.BURIED_TREASURE);
-
         DefaultBiomeFeatures.withCavesAndCanyons(biomegenerationsettings$builder);
-
-        // DefaultBiomeFeatures.withLavaAndWaterLakes(biomegenerationsettings$builder);
-        // DefaultBiomeFeatures.withMonsterRoom(biomegenerationsettings$builder);
-        // DefaultBiomeFeatures.withCommonOverworldBlocks(biomegenerationsettings$builder);
-        // DefaultBiomeFeatures.withOverworldOres(biomegenerationsettings$builder);
-        //  DefaultBiomeFeatures.withClayDisks(biomegenerationsettings$builder);
-        // DefaultBiomeFeatures.withNormalMushroomGeneration(biomegenerationsettings$builder);
-        //DefaultBiomeFeatures.withDesertVegetation(biomegenerationsettings$builder);
-        //  DefaultBiomeFeatures.withLavaAndWaterSprings(biomegenerationsettings$builder);
-
-        //biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.LAKES, Features.LAKE_LAVA);
-        //  DefaultBiomeFeatures.withFrozenTopLayer(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).category(Biome.Category.NONE).depth(depth).scale(scale)
                 .temperature(1.5F)
