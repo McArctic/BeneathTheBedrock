@@ -5,15 +5,8 @@ import com.mcarctic.btb.init.DimensionInit;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.FlowersFeature;
-import net.minecraft.world.lighting.LightEngine;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
 
@@ -32,7 +25,7 @@ public class VoidFabricBlock extends Block {
     }
 
     private static boolean isReplaceable(BlockState state) {
-        return !state.matchesBlock(Blocks.AIR) &&
+        return  !state.matchesBlock(Blocks.AIR) &&
                 !state.matchesBlock(Blocks.BEDROCK) &&
                 !state.matchesBlock(ModBlocks.VOID_FABRIC.get()) &&
                 !state.matchesBlock(Blocks.WATER) &&
