@@ -5,6 +5,7 @@ import com.mcarctic.btb.init.DimensionInit;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -36,39 +37,27 @@ public class VoidFabricBlock extends Block {
                 ;
     }
 
-    private static boolean isInVoidWorld(World world) {
+    private static boolean isVoidDimesnion(World world) {
         return !(world.getDimensionKey() == DimensionInit.VOID_WORLD);
 
     }
 
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        if (isInVoidWorld(worldIn.getWorld())) {
-            if (!worldIn.isAreaLoaded(pos, 3))
-                return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
-            if (isReplaceable(worldIn.getBlockState(pos.up()))) {
-                worldIn.setBlockState(pos.up(), ModBlocks.VOID_FABRIC.get().getDefaultState());
-            } else if (isReplaceable(worldIn.getBlockState(pos.down()))) {
-                worldIn.setBlockState(pos.down(), ModBlocks.VOID_FABRIC.get().getDefaultState());
-            }
-            else if (isReplaceable(worldIn.getBlockState(pos.north()))) {
-                worldIn.setBlockState(pos.north(), ModBlocks.VOID_FABRIC.get().getDefaultState());
-            }
-            else if (isReplaceable(worldIn.getBlockState(pos.south()))) {
-                worldIn.setBlockState(pos.south(), ModBlocks.VOID_FABRIC.get().getDefaultState());
-            }
-            else if (isReplaceable(worldIn.getBlockState(pos.east()))) {
-                worldIn.setBlockState(pos.east(), ModBlocks.VOID_FABRIC.get().getDefaultState());
-            }
-            else if (isReplaceable(worldIn.getBlockState(pos.west()))) {
-                worldIn.setBlockState(pos.west(), ModBlocks.VOID_FABRIC.get().getDefaultState());
-            }
-            else {
-                worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
-            }
+        if (!isVoidDimesnion(worldIn.getWorld())) {
+            return;
+        }
+        if (!worldIn.isAreaLoaded(pos, 3)) {
+            return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
+        }
 
+        for (Direction direction:directions) {
+            BlockPos blockPos = pos.offset(direction);
 
-
+            if(isReplaceable(worldIn.getBlockState(blockPos))){
+                worldIn.setBlockState(blockPos, ModBlocks.VOID_FABRIC.get().getDefaultState());
+                return;
+            }
         }
     }
 
