@@ -1,20 +1,21 @@
 package com.mcarctic.btb.client.renderer;
 
-import net.minecraft.client.renderer.RenderState;
+
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
-import static net.minecraft.client.renderer.RenderType.makeType;
+import static net.minecraft.client.renderer.RenderType.create;
 
-public class ModRenderType extends RenderState {
+public class ModRenderType extends RenderStateShard {
 
     public ModRenderType(String p_i225973_1_, Runnable p_i225973_2_, Runnable p_i225973_3_) {
         super(p_i225973_1_, p_i225973_2_, p_i225973_3_);
     }
 
     public static RenderType getCustomEyes(ResourceLocation p_228652_0_) {
-        TextureState renderstate$texturestate = new TextureState(p_228652_0_, false, false);
-        return makeType("custom_eyes", DefaultVertexFormats.ENTITY, 7, 256, false, true, RenderType.State.getBuilder().texture(renderstate$texturestate).transparency(ADDITIVE_TRANSPARENCY).writeMask(COLOR_WRITE).fog(BLACK_FOG).fog(NO_FOG).build(false));
+        RenderStateShard.TextureStateShard renderstate$texturestate = new RenderStateShard.TextureStateShard(p_228652_0_, false, false);
+        return create("custom_eyes", DefaultVertexFormat.NEW_ENTITY, 7, 256, false, true, RenderType.CompositeState.builder().setTextureState(renderstate$texturestate).setTransparencyState(ADDITIVE_TRANSPARENCY).setWriteMaskState(COLOR_WRITE).fog(BLACK_FOG).fog(NO_FOG).build(false));
     }
 }
