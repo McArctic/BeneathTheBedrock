@@ -33,7 +33,7 @@ public class ModSpawnEggItem extends SpawnEggItem {
 
     public static void initSpawnEggs() {
         final Map<EntityType<?>, SpawnEggItem> EGGS = ObfuscationReflectionHelper.getPrivateValue(
-                SpawnEggItem.class, null, "field_195987_b");
+                SpawnEggItem.class, null, "f_43201_");
         DefaultDispenseItemBehavior dispenseItemBehavior = new DefaultDispenseItemBehavior() {
 
             @Override

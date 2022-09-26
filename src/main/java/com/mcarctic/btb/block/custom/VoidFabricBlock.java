@@ -1,7 +1,6 @@
 package com.mcarctic.btb.block.custom;
 
 import com.mcarctic.btb.block.ModBlocks;
-import com.mcarctic.btb.init.DimensionInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -44,7 +43,7 @@ public class VoidFabricBlock extends Block {
     }
 
     private static boolean isVoidDimesnion(Level world) {
-        return !(world.dimension() == DimensionInit.VOID_WORLD);
+        return !(world.dimension() == Level.NETHER);
 
     }
 

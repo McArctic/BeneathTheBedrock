@@ -3,11 +3,11 @@ package com.mcarctic.btb.events;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.enchantment.ModEnchantments;
-import com.mcarctic.btb.init.DimensionInit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,8 +26,8 @@ public class ModClientEvents {
             return;
         }
 
-        if (player.getLevel().dimension() == DimensionInit.VOID_WORLD) {
-            event.setFarPlaneDistance(.3F);
+        if (player.getLevel().dimension() == Level.NETHER) {
+            event.setNearPlaneDistance(.3F);
             //event.setCanceled(true);
         }
     }
