@@ -6,6 +6,10 @@ import com.mcarctic.btb.tileentity.DestabilizerTile;
 import com.mcarctic.btb.tileentity.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -14,8 +18,9 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.BlockHitResult;
 
-public class DestabilizerBlock extends BaseEntityBlock {
+public class DestabilizerBlock extends Block {
     public DestabilizerBlock() {
         super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
                 .strength(15f)
@@ -40,14 +45,14 @@ public class DestabilizerBlock extends BaseEntityBlock {
     //NEW STUFF
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
-                                             PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote()) {
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos,
+                                             Player player, InteractionHand handIn, BlockHitResult hit) {
+        if (!worldIn.isClientSide()) {
             if (!player.isCrouching()) {
                 MinecraftServer server = worldIn.getServer();
 
                 if (server != null) {
-                    if (worldIn.getDimensionKey() == DimensionInit.VOID_WORLD) {
+                    if (worldIn.dimension() == DimensionInit.VOID_WORLD) {
                         ServerWorld overWorld = server.getWorld(World.OVERWORLD);
                         ServerWorld serverworld = ((ServerWorld)worldIn).getServer().getWorld(World.OVERWORLD);
 
