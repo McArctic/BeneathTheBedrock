@@ -2,12 +2,11 @@ package com.mcarctic.btb.init;
 
 import com.mcarctic.btb.block.ModBlocks;
 import com.mcarctic.btb.block.custom.DestabilizerBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.util.ITeleporter;
 
 import java.util.function.Function;
@@ -24,43 +23,39 @@ public class VoidTeleporter implements ITeleporter {
     }
 
     @Override
-    public Entity placeEntity(Entity entity, ServerWorld currentWorld, ServerWorld destWorld,
+    public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld,
                               float yaw, Function<Boolean, Entity> repositionEntity) {
 
         entity = repositionEntity.apply(false);
         double y = 61;
-        if(lastPos != BlockPos.ZERO) {
-        y = lastPos.getY();
-        }
-
-        if (!insideDimension) {
-           // y = thisPos.getY();
+        if (lastPos != BlockPos.ZERO) {
+            y = lastPos.getY();
         }
 
         BlockPos destinationPos = new BlockPos(thisPos.getX(), y, thisPos.getZ());
 
         int tries = 0;
         while ((destWorld.getBlockState(destinationPos).getMaterial() != Material.AIR) &&
-        !destWorld.getBlockState(destinationPos).isReplaceable(Fluids.WATER) &&
-        destWorld.getBlockState(destinationPos.up()).getMaterial() !=Material.AIR &&
-        !destWorld.getBlockState(destinationPos.up()).isReplaceable(Fluids.WATER) && tries < 25) {
+                !destWorld.getBlockState(destinationPos).canBeReplaced(Fluids.WATER) &&
+                destWorld.getBlockState(destinationPos.above()).getMaterial() != Material.AIR &&
+                !destWorld.getBlockState(destinationPos.above()).canBeReplaced(Fluids.WATER) && tries < 25) {
 
-            destinationPos = destinationPos.up(2);
+            destinationPos = destinationPos.above(2);
             tries++;
         }
 
-        entity.setPositionAndUpdate(destinationPos.getX(), destinationPos.getY(), destinationPos.getZ());
+        entity.teleportTo(destinationPos.getX(), destinationPos.getY(), destinationPos.getZ());
 
-      if(insideDimension){
+        if (insideDimension) {
             boolean doSetBlock = true;
-            for (BlockPos checkPos : BlockPos.getAllInBoxMutable(destinationPos.down(10).west(10), destinationPos.up(10).east(10))) {
-                if(destWorld.getBlockState(checkPos).getBlock() instanceof DestabilizerBlock){
+            for (BlockPos checkPos : BlockPos.betweenClosed(destinationPos.below(10).west(10), destinationPos.above(10).east(10))) {
+                if (destWorld.getBlockState(checkPos).getBlock() instanceof DestabilizerBlock) {
                     doSetBlock = false;
                     break;
                 }
             }
-            if(doSetBlock){
-                destWorld.setBlockState(destinationPos, ModBlocks.DESTABILIZER.get().getDefaultState());
+            if (doSetBlock) {
+                destWorld.setBlockAndUpdate(destinationPos, ModBlocks.DESTABILIZER.get().defaultBlockState());
             }
         }
 
@@ -69,5 +64,5 @@ public class VoidTeleporter implements ITeleporter {
         System.out.println("LAST POS : " + lastPos);
         return entity;
 
-        }
     }
+}

@@ -2,6 +2,7 @@ package com.mcarctic.btb.client.renderer;
 
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +17,6 @@ public class ModRenderType extends RenderStateShard {
 
     public static RenderType getCustomEyes(ResourceLocation p_228652_0_) {
         RenderStateShard.TextureStateShard renderstate$texturestate = new RenderStateShard.TextureStateShard(p_228652_0_, false, false);
-        return create("custom_eyes", DefaultVertexFormat.NEW_ENTITY, 7, 256, false, true, RenderType.CompositeState.builder().setTextureState(renderstate$texturestate).setTransparencyState(ADDITIVE_TRANSPARENCY).setWriteMaskState(COLOR_WRITE).fog(BLACK_FOG).fog(NO_FOG).build(false));
+        return create("custom_eyes", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder().setTextureState(renderstate$texturestate).setTransparencyState(ADDITIVE_TRANSPARENCY).setWriteMaskState(COLOR_WRITE).setDepthTestState(NO_DEPTH_TEST).createCompositeState(false));
     }
 }

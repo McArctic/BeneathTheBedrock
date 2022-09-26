@@ -1,35 +1,23 @@
 package com.mcarctic.btb.world.gen;
 
-import com.mcarctic.btb.world.biome.ModBiomes;
-import com.mcarctic.btb.world.structure.ModStructures;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-
-import java.util.List;
-import java.util.Set;
-import java.util.function.Supplier;
 
 public class ModStructureGeneration {
     public static void generateStructures(final BiomeLoadingEvent event) {
-        RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
+        /*ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
         //BiomeDictionary.Type.getAll() Biome Spawn In?
-        if(types.contains(BiomeDictionary.Type.OVERWORLD)) {
-            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+        if (types.contains(BiomeDictionary.Type.OVERWORLD)) {
+            List<Supplier<StructureFeature<?>>> structures = event.getGeneration().;
 
             structures.add(() -> ModStructures.DESTABILIZER_ROOM.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
         }
-        if(event.getName().toString().contains(ModBiomes.VOID_PLAINS.get().getRegistryName().toString())){
+        if (event.getName().toString().contains(ModBiomes.VOID_PLAINS.get().getRegistryName().toString())) {
 
-            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+            List<Supplier<StructureFeature<?>>> structures = event.getGeneration().getStructures();
 
             structures.add(() -> ModStructures.VOID_REMNANT.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 
-        }
+        }*/ //TODO Generation
     }
 }

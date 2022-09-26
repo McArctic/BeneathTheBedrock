@@ -1,17 +1,16 @@
 package com.mcarctic.btb.item;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class ModItemGroup {
 
-    public static final ItemGroup VOID_GROUP = new ItemGroup("voidTab") {
+    public static final CreativeModeTab VOID_GROUP = new CreativeModeTab("voidTab") {
         @Override
 
-        public ItemStack createIcon()
-        {
-            return new ItemStack(Items.BEDROCK.getItem());
+        public ItemStack makeIcon() {
+            return new ItemStack(Items.BEDROCK);
         }
     };
 }

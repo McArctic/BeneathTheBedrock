@@ -1,45 +1,17 @@
 package com.mcarctic.btb.world.biome;
 
-import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.entity.ModEntityTypes;
-import com.mcarctic.btb.world.gen.ModStructureGeneration;
-import com.mcarctic.btb.world.structure.ModStructures;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MagmaBlock;
-import net.minecraft.client.audio.BackgroundMusicTracks;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Features;
-import net.minecraft.world.gen.feature.structure.StructureFeatures;
-import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import javax.swing.*;
-import java.util.function.Supplier;
-
 public class ModBiomes {
-    public static final DeferredRegister<Biome> BIOMES
+    /*public static final DeferredRegister<Biome> BIOMES
             = DeferredRegister.create(ForgeRegistries.BIOMES, BeneathTheBedrock.MOD_ID);
 
     public static final RegistryObject<Biome> VOID_PLAINS = BIOMES.register("void_plains",
             () -> makeVoidBiome(() -> ModConfiguredSurfaceBuilders.VOID_SURFACE, 0.125f, 0.05f));
 
-    private  static  Biome makeVoidBiome(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale){
+    private static Biome makeVoidBiome(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
 
-          mobspawninfo$builder.withSpawner(EntityClassification.MONSTER,
-               new MobSpawnInfo.Spawners(ModEntityTypes.VOID_CRAWLER.get(), 100, 0, 1));
+        mobspawninfo$builder.withSpawner(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.VOID_CRAWLER.get(), 100, 0, 1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).withSurfaceBuilder(surfaceBuilder);
 
@@ -65,15 +37,16 @@ public class ModBiomes {
                 .withMobSpawnSettings(mobspawninfo$builder.build()).withGenerationSettings(biomegenerationsettings$builder.build()).build();
 
     }
+
     private static int getSkyColorWithTemperatureModifier(float temperature) {
         float lvt_1_1_ = temperature / 3.0F;
         lvt_1_1_ = MathHelper.clamp(lvt_1_1_, -1.0F, 1.0F);
         return MathHelper.hsvToRGB(0.2460909F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0F);
     }
 
-    public static void register(IEventBus eventBus){
+    public static void register(IEventBus eventBus) {
         BIOMES.register(eventBus);
     }
 
-
+*/ //TODO Generation
 }
