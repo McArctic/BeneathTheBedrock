@@ -1,13 +1,14 @@
 package com.mcarctic.btb.init;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
+
 
 public class DimensionInit {
-    public static final RegistryKey<World> VOID_WORLD = RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
+    public static final ResourceKey<Level> VOID_WORLD = ResourceKey.create(Registry.DIMENSION_REGISTRY,
             new ResourceLocation(BeneathTheBedrock.MOD_ID, "void"));
 }
 

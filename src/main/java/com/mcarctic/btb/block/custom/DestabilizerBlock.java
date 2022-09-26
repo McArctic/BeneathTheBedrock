@@ -2,18 +2,15 @@ package com.mcarctic.btb.block.custom;
 
 import com.mcarctic.btb.init.DimensionInit;
 import com.mcarctic.btb.init.VoidTeleporter;
-import com.mcarctic.btb.tileentity.DestabilizerTile;
-import com.mcarctic.btb.tileentity.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -28,49 +25,51 @@ public class DestabilizerBlock extends Block {
                 .noOcclusion());
     }
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
+    /* TODO BlockEntity
 
-    @Override
-    public ModTileEntities createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntities.DESTABILIZER_TILE.get().create();
-    }
+        @Override
+        public boolean hasTileEntity(BlockState state) {
+            return true;
+        }
 
-    @Override
-    public BlockRenderType getRenderType(BlockState p_149645_1_) {
-        return BlockRenderType.ENTITYBLOCK_ANIMATED;
-    }
-    //NEW STUFF
+        @Override
+        public ModTileEntities createTileEntity(BlockState state, IBlockReader world) {
+            return ModTileEntities.DESTABILIZER_TILE.get().create();
+        }
 
+        @Override
+        public BlockRenderType getRenderType(BlockState p_149645_1_) {
+            return BlockRenderType.ENTITYBLOCK_ANIMATED;
+        }
+        //NEW STUFF
+
+        */
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos,
-                                             Player player, InteractionHand handIn, BlockHitResult hit) {
+                                 Player player, InteractionHand handIn, BlockHitResult hit) {
         if (!worldIn.isClientSide()) {
             if (!player.isCrouching()) {
                 MinecraftServer server = worldIn.getServer();
 
                 if (server != null) {
                     if (worldIn.dimension() == DimensionInit.VOID_WORLD) {
-                        ServerWorld overWorld = server.getWorld(World.OVERWORLD);
-                        ServerWorld serverworld = ((ServerWorld)worldIn).getServer().getWorld(World.OVERWORLD);
+                        ServerLevel overWorld = server.getLevel(Level.OVERWORLD);
 
                         if (overWorld != null) {
                             player.changeDimension(overWorld, new VoidTeleporter(pos, false));
                         }
                     } else {
-                        ServerWorld voidWorld = server.getWorld(DimensionInit.VOID_WORLD);
+                        ServerLevel voidWorld = server.getLevel(DimensionInit.VOID_WORLD);
                         if (voidWorld != null) {
                             player.changeDimension(voidWorld, new VoidTeleporter(pos, true));
                         }
                     }
-                    return ActionResultType.SUCCESS;
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
 
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return super.use(state, worldIn, pos, player, handIn, hit);
     }
 
 
@@ -98,8 +97,6 @@ public class DestabilizerBlock extends Block {
 
 
     //////////////////ddd
-
-
 
 
 }
