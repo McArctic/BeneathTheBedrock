@@ -2,33 +2,25 @@ package com.mcarctic.btb.block.custom;
 
 import com.mcarctic.btb.init.DimensionInit;
 import com.mcarctic.btb.init.VoidTeleporter;
+import com.mcarctic.btb.tileentity.DestabilizerTile;
 import com.mcarctic.btb.tileentity.ModTileEntities;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.command.CommandSource;
-import net.minecraftforge.client.event.ClientChatEvent;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
-public class DestabilizerBlock extends Block {
+public class DestabilizerBlock extends BaseEntityBlock {
     public DestabilizerBlock() {
-        super(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.GRAY).hardnessAndResistance(15f)
+        super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
+                .strength(15f)
                 .sound(SoundType.STONE)
-                .notSolid());
+                .noOcclusion());
     }
 
     @Override
@@ -37,7 +29,7 @@ public class DestabilizerBlock extends Block {
     }
 
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public ModTileEntities createTileEntity(BlockState state, IBlockReader world) {
         return ModTileEntities.DESTABILIZER_TILE.get().create();
     }
 
@@ -75,8 +67,6 @@ public class DestabilizerBlock extends Block {
 
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
-
-
 
 
 //SH0peigjsoigj;ldgjkf

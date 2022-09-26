@@ -1,29 +1,33 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
+        maven { url = 'https://libraries.minecraft.net/' }
+        maven { url = 'https://maven.parchmentmc.org' }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+}
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-
-version = '1.16.5-1.0'
+version = '1.18.2-1.0'
 group = 'com.mcarctic.btb' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'btb'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
-    mappings channel: 'snapshot', version: '20210309-1.16.5'
+    mappings channel: 'parchment', version: '2022.09.04-1.18.2'
 
     runs {
         client {
@@ -80,13 +84,16 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    maven { // Vanilla
+        name 'Vanilla'
+        url 'https://libraries.minecraft.net/'
+    }
 
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
 }
 dependencies {
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.45')
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
-
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.80'
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.18:3.0.39')
 
     jar {
         manifest {
