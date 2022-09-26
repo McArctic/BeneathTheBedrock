@@ -1,13 +1,14 @@
 package com.mcarctic.btb.client.model.entity;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.util.math.MathHelper;
 
-public class VoidCrawlerModel<V extends MonsterEntity> extends EntityModel<V> {
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.Entity;
+
+public class VoidCrawlerModel<V extends Entity> extends EntityModel<V> {
     private final ModelRenderer head;
     private final ModelRenderer body0;
     private final ModelRenderer body1;
@@ -78,7 +79,7 @@ public class VoidCrawlerModel<V extends MonsterEntity> extends EntityModel<V> {
     }
 
     @Override
-    public void setRotationAngles(V v, float v2, float v1, float v22, float v3, float v4) {
+    public void setupAnim(V v, float v2, float v1, float v22, float v3, float v4) {
         this.head.rotateAngleY = v3 * 0.017453292F;
         this.head.rotateAngleX = v4 * 0.017453292F;
         float lvt_7_1_ = 0.7853982F;
@@ -151,7 +152,7 @@ public class VoidCrawlerModel<V extends MonsterEntity> extends EntityModel<V> {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, IVertexBuilder buffer, int i, int i1, float v, float v1, float v2, float v3) {
+    public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int i, int i1, float v, float v1, float v2, float v3) {
         head.render(matrixStack, buffer, i, i1);
         body0.render(matrixStack, buffer, i, i1);
         body1.render(matrixStack, buffer, i, i1);
