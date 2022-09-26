@@ -11,10 +11,20 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class VoidFabricBlock extends Block {
+    private static final List<Direction> directions = Arrays.asList(
+            Direction.UP,
+            Direction.DOWN,
+            Direction.NORTH,
+            Direction.EAST,
+            Direction.SOUTH,
+            Direction.WEST
+    );
+
     public VoidFabricBlock() {
         super(AbstractBlock.Properties.create(Material.ORGANIC, MaterialColor.BLACK).hardnessAndResistance(5f)
                 .tickRandomly()
