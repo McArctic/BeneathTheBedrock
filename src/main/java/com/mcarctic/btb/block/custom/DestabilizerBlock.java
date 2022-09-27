@@ -1,6 +1,7 @@
 package com.mcarctic.btb.block.custom;
 
 import com.mcarctic.btb.init.VoidTeleporter;
+import com.mcarctic.btb.world.dimension.ModDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -51,14 +52,14 @@ public class DestabilizerBlock extends Block {
                 MinecraftServer server = worldIn.getServer();
 
                 if (server != null) {
-                    if (worldIn.dimension() == Level.NETHER) {
+                    if (worldIn.dimension() == ModDimensions.VOIDDIM_KEY) {
                         ServerLevel overWorld = server.getLevel(Level.OVERWORLD);
 
                         if (overWorld != null) {
                             player.changeDimension(overWorld, new VoidTeleporter(pos, false));
                         }
                     } else {
-                        ServerLevel voidWorld = server.getLevel(Level.NETHER);
+                        ServerLevel voidWorld = server.getLevel(ModDimensions.VOIDDIM_KEY);
                         if (voidWorld != null) {
                             player.changeDimension(voidWorld, new VoidTeleporter(pos, true));
                         }
