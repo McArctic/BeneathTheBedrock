@@ -16,12 +16,14 @@ public class ModEntityTypes {
 
 
     public static final RegistryObject<EntityType<VoidCrawler>> VOID_CRAWLER =
-            ENTITY_TYPES.register("void_crawler", () -> EntityType.Builder.of(VoidCrawler::new,
-                    MobCategory.MONSTER).sized(1f, 2f).build(new ResourceLocation(BeneathTheBedrock.MOD_ID,
-                    "void_crawler").toString()));
+            ENTITY_TYPES.register("void_crawler",
+                    () -> EntityType.Builder.of(VoidCrawler::new, MobCategory.MONSTER)
+                            .sized(1f, 2f)
+                            .build(new ResourceLocation(BeneathTheBedrock.MOD_ID, "void_crawler").toString()));
 
 
     public static void register(IEventBus eventBus) {
+
         ENTITY_TYPES.register(eventBus);
     }
 }

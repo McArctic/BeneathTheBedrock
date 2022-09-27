@@ -1,10 +1,13 @@
 package com.mcarctic.btb;
 
 import com.mcarctic.btb.block.ModBlocks;
+import com.mcarctic.btb.client.renderer.entity.VoidCrawlerRenderer;
 import com.mcarctic.btb.enchantment.ModEnchantments;
 import com.mcarctic.btb.entity.ModEntityTypes;
 import com.mcarctic.btb.item.ModItems;
 import com.mcarctic.btb.tileentity.ModTileEntities;
+import com.mcarctic.btb.world.dimension.ModDimensions;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.block.Blocks;
@@ -47,6 +50,8 @@ public class BeneathTheBedrock {
 
         //ModStructures.register(eventBus);
 
+        ModDimensions.register();
+
 
         eventBus.addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -69,15 +74,15 @@ public class BeneathTheBedrock {
 
 
         //Entity
-        SpawnPlacements.register(ModEntityTypes.VOID_CRAWLER.get(), SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+     //   SpawnPlacements.register(ModEntityTypes.VOID_CRAWLER.get(), SpawnPlacements.Type.ON_GROUND,
+      //          Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         //ClientRegistry.bindTileEntityRenderer(ModTileEntities.DESTABILIZER_TILE.get(), DestabilizerRenderer::new);
 
-        //RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.VOID_CRAWLER.get(), VoidCrawlerRenderer::new);
+       EntityRenderers.register(ModEntityTypes.VOID_CRAWLER.get(), VoidCrawlerRenderer::new);
 
     }
 

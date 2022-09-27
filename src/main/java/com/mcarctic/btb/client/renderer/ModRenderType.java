@@ -17,6 +17,9 @@ public class ModRenderType extends RenderStateShard {
 
     public static RenderType getCustomEyes(ResourceLocation p_228652_0_) {
         RenderStateShard.TextureStateShard renderstate$texturestate = new RenderStateShard.TextureStateShard(p_228652_0_, false, false);
-        return create("custom_eyes", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder().setTextureState(renderstate$texturestate).setTransparencyState(ADDITIVE_TRANSPARENCY).setWriteMaskState(COLOR_WRITE).setDepthTestState(NO_DEPTH_TEST).createCompositeState(false));
+        return create("eyes", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
+                .setShaderState(RENDERTYPE_EYES_SHADER).setTextureState(renderstate$texturestate)
+                .setTransparencyState(ADDITIVE_TRANSPARENCY).setWriteMaskState(COLOR_WRITE)
+                .createCompositeState(false));
     }
 }
