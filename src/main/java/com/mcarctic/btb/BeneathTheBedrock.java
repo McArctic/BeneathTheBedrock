@@ -6,6 +6,7 @@ import com.mcarctic.btb.enchantment.ModEnchantments;
 import com.mcarctic.btb.entity.ModEntityTypes;
 import com.mcarctic.btb.item.ModItems;
 import com.mcarctic.btb.tileentity.ModTileEntities;
+import com.mcarctic.btb.world.biome.ModBiomes;
 import com.mcarctic.btb.world.dimension.ModDimensions;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.Mob;
@@ -42,7 +43,7 @@ public class BeneathTheBedrock {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(eventBus);
-        //ModBiomes.register(eventBus);
+        ModBiomes.register();
         ModBlocks.register(eventBus);
         ModTileEntities.register(eventBus);
         ModEntityTypes.register(eventBus);
@@ -51,7 +52,6 @@ public class BeneathTheBedrock {
         //ModStructures.register(eventBus);
 
         ModDimensions.register();
-
 
         eventBus.addListener(this::setup);
         // Register the enqueueIMC method for modloading
