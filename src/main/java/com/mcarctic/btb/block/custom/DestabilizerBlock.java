@@ -1,5 +1,6 @@
 package com.mcarctic.btb.block.custom;
 
+import com.mcarctic.btb.entity.ModBlockEntities;
 import com.mcarctic.btb.init.VoidTeleporter;
 import com.mcarctic.btb.world.dimension.ModDimensions;
 import net.minecraft.core.BlockPos;
@@ -9,15 +10,18 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 
-public class DestabilizerBlock extends Block {
+public class DestabilizerBlock extends BaseEntityBlock {
     public DestabilizerBlock() {
         super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
                 .strength(15f)
@@ -25,25 +29,17 @@ public class DestabilizerBlock extends Block {
                 .noOcclusion());
     }
 
-    /* TODO BlockEntity
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return ModBlockEntities.DESTABILIZER_BLOCK_ENTITY.get().create(pos, state);
+    }
 
-        @Override
-        public boolean hasTileEntity(BlockState state) {
-            return true;
-        }
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
+    }
 
-        @Override
-        public ModTileEntities createTileEntity(BlockState state, IBlockReader world) {
-            return ModTileEntities.DESTABILIZER_TILE.get().create();
-        }
-
-        @Override
-        public BlockRenderType getRenderType(BlockState p_149645_1_) {
-            return BlockRenderType.ENTITYBLOCK_ANIMATED;
-        }
-        //NEW STUFF
-
-        */
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos,
                                  Player player, InteractionHand handIn, BlockHitResult hit) {

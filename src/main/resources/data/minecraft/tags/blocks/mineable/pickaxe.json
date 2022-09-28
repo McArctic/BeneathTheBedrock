@@ -1,0 +1,7 @@
+{
+    "replace": false,
+    "values":[
+    "btb:void_fabric",
+    "btb:void_fabric_nonspreadable"
+    ]
+}

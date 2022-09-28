@@ -1,25 +1,24 @@
-package com.mcarctic.btb.client.model.tile;
+package com.mcarctic.btb.item.client;
 
 import com.mcarctic.btb.BeneathTheBedrock;
+import com.mcarctic.btb.item.custom.DestabilizerBlockItem;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class
-DestabilizerModel extends AnimatedGeoModel {
+public class DestabilizerBlockItemModel extends AnimatedGeoModel<DestabilizerBlockItem> {
 
-    //Change and " "
     @Override
-    public ResourceLocation getAnimationFileLocation(Object entity) {
+    public ResourceLocation getAnimationFileLocation(DestabilizerBlockItem object) {
         return new ResourceLocation(BeneathTheBedrock.MOD_ID, "animations/destabilizer.animation.json");
     }
 
     @Override
-    public ResourceLocation getModelLocation(Object animatable) {
+    public ResourceLocation getModelLocation(DestabilizerBlockItem animatable) {
         return new ResourceLocation(BeneathTheBedrock.MOD_ID, "geo/destabilizer.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Object entity) {
+    public ResourceLocation getTextureLocation(DestabilizerBlockItem object) {
         return new ResourceLocation(BeneathTheBedrock.MOD_ID, "textures/block/destabilizer.png");
     }
 }

@@ -3,9 +3,9 @@ package com.mcarctic.btb;
 import com.mcarctic.btb.block.ModBlocks;
 import com.mcarctic.btb.client.renderer.entity.VoidCrawlerRenderer;
 import com.mcarctic.btb.enchantment.ModEnchantments;
+import com.mcarctic.btb.entity.ModBlockEntities;
 import com.mcarctic.btb.entity.ModEntityTypes;
 import com.mcarctic.btb.item.ModItems;
-import com.mcarctic.btb.tileentity.ModTileEntities;
 import com.mcarctic.btb.world.biome.ModBiomes;
 import com.mcarctic.btb.world.dimension.ModDimensions;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -42,7 +42,7 @@ public class BeneathTheBedrock {
         ModItems.register(eventBus);
         ModBiomes.register();
         ModBlocks.register(eventBus);
-        ModTileEntities.register(eventBus);
+        ModBlockEntities.register(eventBus);
         ModEntityTypes.register(eventBus);
         ModEnchantments.register(eventBus);
 

@@ -23,9 +23,6 @@ public class VoidFabricBlock extends Block {
     public VoidFabricBlock() {
         super(BlockBehaviour.Properties.of(Material.GRASS, MaterialColor.COLOR_BLACK)
                 .randomTicks()
-                //TODO Tool Tags
-                //.harvestLevel(2)
-                //.harvestTool(ToolType.PICKAXE)
                 .requiresCorrectToolForDrops()
                 .strength(5f)
                 .sound(SoundType.WOOL));
