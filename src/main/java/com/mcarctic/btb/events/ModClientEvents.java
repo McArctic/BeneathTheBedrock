@@ -3,6 +3,8 @@ package com.mcarctic.btb.events;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.enchantment.ModEnchantments;
+import com.mcarctic.btb.world.dimension.ModDimensions;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -26,8 +28,15 @@ public class ModClientEvents {
             return;
         }
 
-        if (player.getLevel().dimension() == Level.NETHER) {
-            event.setNearPlaneDistance(.3F);
+        if (player.getLevel().dimension() == ModDimensions.VOIDDIM_KEY) {
+
+            RenderSystem.setShaderFogColor(0, 0, 0);
+            RenderSystem.setShaderFogStart(.1F);
+            RenderSystem.setShaderFogEnd(Math.min(10F, event.getFarPlaneDistance() * 0.5F));
+
+            // event.setFogShape(FogShape.SPHERE);
+            // event.setNearPlaneDistance(.4F);
+            //  event.setFarPlaneDistance(.6F);
             //event.setCanceled(true);
         }
     }

@@ -10,7 +10,7 @@
       "ore_veins_enabled": true,
       "legacy_random_source": false,
       "default_block": {
-        "Name": "btb:void_fabric"
+        "Name": "btb:void_fabric_nonspreadable"
       },
       "default_fluid": {
         "Name": "minecraft:water",

@@ -1,6 +1,7 @@
 package com.mcarctic.btb.block.custom;
 
 import com.mcarctic.btb.block.ModBlocks;
+import com.mcarctic.btb.world.dimension.ModDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -32,6 +33,7 @@ public class VoidFabricBlock extends Block {
         return !state.is(Blocks.AIR) &&
                 !state.is(Blocks.BEDROCK) &&
                 !state.is(ModBlocks.VOID_FABRIC.get()) &&
+                !state.is(ModBlocks.VOID_FABRIC_NONSPREADABLE.get()) &&
                 !state.is(Blocks.WATER) &&
                 !state.is(Blocks.VOID_AIR) &&
                 !state.is(Blocks.CAVE_AIR) &&
@@ -40,13 +42,14 @@ public class VoidFabricBlock extends Block {
     }
 
     private static boolean isVoidDimesnion(Level world) {
-        return !(world.dimension() == Level.NETHER);
+        return !(world.dimension() == ModDimensions.VOIDDIM_KEY);
 
     }
 
     @Override
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
         if (!isVoidDimesnion(worldIn.getLevel())) {
+            worldIn.setBlockAndUpdate(pos, ModBlocks.VOID_FABRIC_NONSPREADABLE.get().defaultBlockState());
             return;
         }
         if (!worldIn.isAreaLoaded(pos, 3)) {
