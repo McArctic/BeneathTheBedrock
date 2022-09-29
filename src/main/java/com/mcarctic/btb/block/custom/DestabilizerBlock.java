@@ -48,14 +48,14 @@ public class DestabilizerBlock extends BaseEntityBlock {
                 MinecraftServer server = worldIn.getServer();
 
                 if (server != null) {
-                    if (worldIn.dimension() == ModDimensions.VOIDDIM_KEY) {
+                    if (worldIn.dimension() == ModDimensions.VOID_KEY) {
                         ServerLevel overWorld = server.getLevel(Level.OVERWORLD);
 
                         if (overWorld != null) {
                             player.changeDimension(overWorld, new VoidTeleporter(pos, false));
                         }
                     } else {
-                        ServerLevel voidWorld = server.getLevel(ModDimensions.VOIDDIM_KEY);
+                        ServerLevel voidWorld = server.getLevel(ModDimensions.VOID_KEY);
                         if (voidWorld != null) {
                             player.changeDimension(voidWorld, new VoidTeleporter(pos, true));
                         }

@@ -42,7 +42,7 @@ public class VoidFabricBlock extends Block {
     }
 
     private static boolean isVoidDimesnion(Level world) {
-        return !(world.dimension() == ModDimensions.VOIDDIM_KEY);
+        return !(world.dimension() == ModDimensions.VOID_KEY);
 
     }
 

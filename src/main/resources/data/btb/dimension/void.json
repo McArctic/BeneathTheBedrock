@@ -1,5 +1,5 @@
 {
-  "type": "btb:voiddim",
+  "type": "btb:void",
   "generator": {
     "type": "minecraft:noise",
     "seed": 0,

@@ -1,0 +1,33 @@
+{
+  "display": {
+    "title": {
+      "text": "Down And Under",
+      "color": "light_purple",
+      "bold": false
+    },
+    "description": {
+      "text": "Enter the Void Dimension"
+    },
+    "icon": {
+      "item": "btb:void_fabric"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "btb:textures/block/void_fabric.png"
+  },
+  "criteria": {
+    "ChangedDim": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "btb:void"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ChangedDim"
+    ]
+  ]
+}

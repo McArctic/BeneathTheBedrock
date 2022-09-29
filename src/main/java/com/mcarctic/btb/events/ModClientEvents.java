@@ -27,7 +27,7 @@ public class ModClientEvents {
             return;
         }
 
-        if (player.getLevel().dimension() == ModDimensions.VOIDDIM_KEY) {
+        if (player.getLevel().dimension() == ModDimensions.VOID_KEY) {
 
             RenderSystem.setShaderFogColor(0, 0, 0);
             RenderSystem.setShaderFogStart(.1F);
