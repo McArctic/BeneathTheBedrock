@@ -22,6 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class DestabilizerBlock extends BaseEntityBlock {
+
     public DestabilizerBlock() {
         super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
                 .strength(15f)

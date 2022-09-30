@@ -1,10 +1,7 @@
 package com.mcarctic.btb.block;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.block.custom.DestabilizerBlock;
-import com.mcarctic.btb.block.custom.TieredVoidBlock;
-import com.mcarctic.btb.block.custom.VoidFabricBlock;
-import com.mcarctic.btb.block.custom.VoidFabricNonSpreadableBlock;
+import com.mcarctic.btb.block.custom.*;
 import com.mcarctic.btb.item.BTBItemGroup;
 import com.mcarctic.btb.item.BTBItems;
 import net.minecraft.world.item.BlockItem;
@@ -19,10 +16,10 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 public class BTBBlocks {
-
+    
     public static final DeferredRegister<Block> BLOCKS
             = DeferredRegister.create(ForgeRegistries.BLOCKS, BeneathTheBedrock.MOD_ID);
-    
+
     public static final RegistryObject<Block> VOID_FABRIC = registerBlock("void_fabric",
             VoidFabricBlock::new, BTBItemGroup.VOID_GROUP);
 
@@ -34,6 +31,9 @@ public class BTBBlocks {
 
     public static final RegistryObject<Block> DESTABILIZER = registerBlock("destabilizer",
             DestabilizerBlock::new, null);
+
+    public static final RegistryObject<Block> VOID_FABRIC_TEMP = registerBlock("void_fabric_temp",
+            VoidFabricTempBlock::new, BTBItemGroup.VOID_GROUP);
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
