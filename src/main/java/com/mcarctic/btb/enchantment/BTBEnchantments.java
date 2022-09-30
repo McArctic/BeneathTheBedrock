@@ -10,7 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModEnchantments {
+public class BTBEnchantments {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS
             = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, BeneathTheBedrock.MOD_ID);
 

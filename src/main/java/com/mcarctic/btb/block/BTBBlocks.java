@@ -2,10 +2,11 @@ package com.mcarctic.btb.block;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.block.custom.DestabilizerBlock;
+import com.mcarctic.btb.block.custom.TieredVoidBlock;
 import com.mcarctic.btb.block.custom.VoidFabricBlock;
 import com.mcarctic.btb.block.custom.VoidFabricNonSpreadableBlock;
-import com.mcarctic.btb.item.ModItemGroup;
-import com.mcarctic.btb.item.ModItems;
+import com.mcarctic.btb.item.BTBItemGroup;
+import com.mcarctic.btb.item.BTBItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -17,31 +18,19 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-public class ModBlocks {
+public class BTBBlocks {
 
     public static final DeferredRegister<Block> BLOCKS
             = DeferredRegister.create(ForgeRegistries.BLOCKS, BeneathTheBedrock.MOD_ID);
-
-
+    
     public static final RegistryObject<Block> VOID_FABRIC = registerBlock("void_fabric",
-            VoidFabricBlock::new, ModItemGroup.VOID_GROUP);
+            VoidFabricBlock::new, BTBItemGroup.VOID_GROUP);
+
+    public static final RegistryObject<Block> VOID_FABRIC_WOOD = registerBlock("void_fabric_wood",
+            TieredVoidBlock::new, BTBItemGroup.VOID_GROUP);
 
     public static final RegistryObject<Block> VOID_FABRIC_NONSPREADABLE = registerBlock("void_fabric_nonspreadable",
             VoidFabricNonSpreadableBlock::new, null);
-
-
-                    /*
-                    Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2)
-                    .harvestTool(ToolType.PICKAXE)
-                    .setRequiresTool()
-                    .hardnessAndResistance(5f)
-                    .sound(SoundType.CLOTH)));
-
-                     */
-
-    //  public static final RegistryObject<Block> VOID_FABRIC_TEST = registerBlock("void_fabric_test",
-    //         () -> new VoidFabricTestBlock());
 
     public static final RegistryObject<Block> DESTABILIZER = registerBlock("destabilizer",
             DestabilizerBlock::new, null);
@@ -54,7 +43,7 @@ public class ModBlocks {
     }
 
     private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
-        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
+        BTBItems.ITEMS.register(name, () -> new BlockItem(block.get(),
                 new Item.Properties().tab(tab)));
     }
 

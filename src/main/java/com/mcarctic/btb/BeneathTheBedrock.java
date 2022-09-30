@@ -1,13 +1,13 @@
 package com.mcarctic.btb;
 
-import com.mcarctic.btb.block.ModBlocks;
+import com.mcarctic.btb.block.BTBBlocks;
 import com.mcarctic.btb.client.renderer.entity.VoidCrawlerRenderer;
-import com.mcarctic.btb.enchantment.ModEnchantments;
-import com.mcarctic.btb.entity.ModBlockEntities;
-import com.mcarctic.btb.entity.ModEntityTypes;
-import com.mcarctic.btb.item.ModItems;
-import com.mcarctic.btb.world.biome.ModBiomes;
-import com.mcarctic.btb.world.dimension.ModDimensions;
+import com.mcarctic.btb.enchantment.BTBEnchantments;
+import com.mcarctic.btb.entity.BTBBlockEntities;
+import com.mcarctic.btb.entity.BTBEntityTypes;
+import com.mcarctic.btb.item.BTBItems;
+import com.mcarctic.btb.world.biome.BTBBiomes;
+import com.mcarctic.btb.world.dimension.BTBDimensions;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,7 +26,7 @@ import software.bernie.geckolib3.GeckoLib;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("btb")
+@Mod(BeneathTheBedrock.MOD_ID)
 public class BeneathTheBedrock {
     public static final String MOD_ID = "btb";
     // Directly reference a log4j logger.
@@ -39,16 +39,16 @@ public class BeneathTheBedrock {
         // Register the setup method for modloading
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.register(eventBus);
-        ModBiomes.register();
-        ModBlocks.register(eventBus);
-        ModBlockEntities.register(eventBus);
-        ModEntityTypes.register(eventBus);
-        ModEnchantments.register(eventBus);
+        BTBItems.register(eventBus);
+        BTBBiomes.register();
+        BTBBlocks.register(eventBus);
+        BTBBlockEntities.register(eventBus);
+        BTBEntityTypes.register(eventBus);
+        BTBEnchantments.register(eventBus);
 
         //ModStructures.register(eventBus);
 
-        ModDimensions.register();
+        BTBDimensions.register();
 
         eventBus.addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -79,7 +79,7 @@ public class BeneathTheBedrock {
         // do something that can only be done on the client
         //ClientRegistry.bindTileEntityRenderer(ModTileEntities.DESTABILIZER_TILE.get(), DestabilizerRenderer::new);
 
-        EntityRenderers.register(ModEntityTypes.VOID_CRAWLER.get(), VoidCrawlerRenderer::new);
+        EntityRenderers.register(BTBEntityTypes.VOID_CRAWLER.get(), VoidCrawlerRenderer::new);
 
     }
 

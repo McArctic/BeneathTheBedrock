@@ -1,7 +1,8 @@
 {
-    "replace": false,
-    "values":[
+  "replace": false,
+  "values": [
     "btb:void_fabric",
-    "btb:void_fabric_nonspreadable"
-    ]
+    "btb:void_fabric_nonspreadable",
+    "btb:void_fabric_wood"
+  ]
 }

@@ -10,10 +10,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModEntityTypes {
+public class BTBEntityTypes {
+
     public static DeferredRegister<EntityType<?>> ENTITY_TYPES
             = DeferredRegister.create(ForgeRegistries.ENTITIES, BeneathTheBedrock.MOD_ID);
-
 
     public static final RegistryObject<EntityType<VoidCrawler>> VOID_CRAWLER =
             ENTITY_TYPES.register("void_crawler",
@@ -21,9 +21,7 @@ public class ModEntityTypes {
                             .sized(1f, 2f)
                             .build(new ResourceLocation(BeneathTheBedrock.MOD_ID, "void_crawler").toString()));
 
-
     public static void register(IEventBus eventBus) {
-
         ENTITY_TYPES.register(eventBus);
     }
 }

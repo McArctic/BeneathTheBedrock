@@ -1,6 +1,6 @@
 package com.mcarctic.btb.init;
 
-import com.mcarctic.btb.block.ModBlocks;
+import com.mcarctic.btb.block.BTBBlocks;
 import com.mcarctic.btb.block.custom.DestabilizerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -55,7 +55,7 @@ public class VoidTeleporter implements ITeleporter {
                 }
             }
             if (doSetBlock) {
-                destWorld.setBlockAndUpdate(destinationPos, ModBlocks.DESTABILIZER.get().defaultBlockState());
+                destWorld.setBlockAndUpdate(destinationPos, BTBBlocks.DESTABILIZER.get().defaultBlockState());
             }
         }
 

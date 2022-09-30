@@ -9,7 +9,6 @@ import net.minecraft.world.level.material.MaterialColor;
 public class VoidFabricNonSpreadableBlock extends Block {
     public VoidFabricNonSpreadableBlock() {
         super(BlockBehaviour.Properties.of(Material.GRASS, MaterialColor.COLOR_BLACK)
-                .randomTicks()
                 .requiresCorrectToolForDrops()
                 .strength(5f)
                 .sound(SoundType.WOOL));

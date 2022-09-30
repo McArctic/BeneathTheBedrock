@@ -20,11 +20,11 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ModSpawnEggItem extends SpawnEggItem {
-    protected static final List<ModSpawnEggItem> UNADDED_EGGS = new ArrayList<>();
+public class BTBSpawnEggItem extends SpawnEggItem {
+    protected static final List<BTBSpawnEggItem> UNADDED_EGGS = new ArrayList<>();
     private final Lazy<? extends EntityType<?>> entityTypeSupplier;
 
-    public ModSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier,
+    public BTBSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier,
                            int primaryColorIn, int secondaryColorIn, Properties builder) {
         super(null, primaryColorIn, secondaryColorIn, builder);
         this.entityTypeSupplier = Lazy.of(entityTypeSupplier::get);

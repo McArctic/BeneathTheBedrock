@@ -1,8 +1,8 @@
 package com.mcarctic.btb.block.custom;
 
-import com.mcarctic.btb.entity.ModBlockEntities;
+import com.mcarctic.btb.entity.BTBBlockEntities;
 import com.mcarctic.btb.init.VoidTeleporter;
-import com.mcarctic.btb.world.dimension.ModDimensions;
+import com.mcarctic.btb.world.dimension.BTBDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -29,10 +29,15 @@ public class DestabilizerBlock extends BaseEntityBlock {
                 .noOcclusion());
     }
 
+    private static ServerLevel getDestinationLevel(MinecraftServer server, Level currentLevel) {
+        var destination = currentLevel.dimension() == BTBDimensions.VOID ? Level.OVERWORLD : BTBDimensions.VOID;
+        return server.getLevel(destination);
+    }
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModBlockEntities.DESTABILIZER_BLOCK_ENTITY.get().create(pos, state);
+        return BTBBlockEntities.DESTABILIZER_BLOCK_ENTITY.get().create(pos, state);
     }
 
     @Override
@@ -43,58 +48,20 @@ public class DestabilizerBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos,
                                  Player player, InteractionHand handIn, BlockHitResult hit) {
-        if (!worldIn.isClientSide()) {
-            if (!player.isCrouching()) {
-                MinecraftServer server = worldIn.getServer();
+        if (worldIn.isClientSide() || player.isCrouching()) {
+            return super.use(state, worldIn, pos, player, handIn, hit);
+        }
+        var server = worldIn.getServer();
 
-                if (server != null) {
-                    if (worldIn.dimension() == ModDimensions.VOID_KEY) {
-                        ServerLevel overWorld = server.getLevel(Level.OVERWORLD);
+        var destination = getDestinationLevel(server, worldIn);
 
-                        if (overWorld != null) {
-                            player.changeDimension(overWorld, new VoidTeleporter(pos, false));
-                        }
-                    } else {
-                        ServerLevel voidWorld = server.getLevel(ModDimensions.VOID_KEY);
-                        if (voidWorld != null) {
-                            player.changeDimension(voidWorld, new VoidTeleporter(pos, true));
-                        }
-                    }
-                    return InteractionResult.SUCCESS;
-                }
-            }
+        if (destination != null) {
+            player.changeDimension(destination, new VoidTeleporter(pos, false));
         }
 
-        return super.use(state, worldIn, pos, player, handIn, hit);
-    }
-
-
-//SH0peigjsoigj;ldgjkf
-/*
-    @Override
-    public ActionResultType onBlockActivated(BlockState blockState, World world, BlockPos blockPos, PlayerEntity entity, Hand handIn, BlockRayTraceResult hit) {
-        if (world instanceof ServerWorld && !entity.isPassenger() && !entity.isBeingRidden() && entity.canChangeDimension())
-        {
-
-
-            RegistryKey<World> registrykey = world.getDimensionKey() == World.THE_END ? World.OVERWORLD: World.THE_END;
-            ServerWorld serverworld = ((ServerWorld)world).getServer().getWorld(World.OVERWORLD);
-            if (serverworld == null) {
-                return ActionResultType.FAIL;
-            }
-
-            entity.changeDimension(serverworld);
-        }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
 
     }
-
- */
-
-
-    //////////////////ddd
-
-
 }
 
 

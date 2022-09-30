@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 
-public class ModBiomes {
+public class BTBBiomes {
     public static final ResourceKey<Biome> VOID_PLAINS = ResourceKey.create(Registry.BIOME_REGISTRY,
             new ResourceLocation(BeneathTheBedrock.MOD_ID, "void_plains"));
 
