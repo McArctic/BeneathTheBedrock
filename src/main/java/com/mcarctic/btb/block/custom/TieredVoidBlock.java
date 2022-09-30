@@ -18,6 +18,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import javax.annotation.Nullable;
 
 public class TieredVoidBlock extends Block {
+
     public TieredVoidBlock() {
         super(BlockBehaviour.Properties.of(Material.GRASS, MaterialColor.COLOR_BLACK)
                 .randomTicks()

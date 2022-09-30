@@ -12,14 +12,17 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod.EventBusSubscriber(modid = BeneathTheBedrock.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class BTBClientEvents {
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @SubscribeEvent
     public static void onFogDensity(EntityViewRenderEvent.RenderFogEvent event) {
 
-        Player player = Minecraft.getInstance().player;
+        var player = Minecraft.getInstance().player;
 
         if (player.getLevel().dimension() != BTBDimensions.VOID) {
             return;
