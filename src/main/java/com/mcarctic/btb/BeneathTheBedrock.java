@@ -19,6 +19,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.zytorx.library.registry.Registrar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -32,23 +33,23 @@ public class BeneathTheBedrock {
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
 
-
     public BeneathTheBedrock() {
         GeckoLib.initialize();
+
+        var registrar = Registrar.getInstance(MOD_ID);
+        registrar.addBlockDeclaration(BTBBlocks.class);
+        registrar.addItemDeclaration(BTBItems.class);
 
         // Register the setup method for modloading
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        BTBItems.register(eventBus);
+        registrar.register(eventBus);
         BTBBiomes.register();
-        BTBBlocks.register(eventBus);
         BTBBlockEntities.register(eventBus);
         BTBEntityTypes.register(eventBus);
         BTBEnchantments.register(eventBus);
-
-        //ModStructures.register(eventBus);
-
         BTBDimensions.register();
+
 
         eventBus.addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -80,6 +81,7 @@ public class BeneathTheBedrock {
         //ClientRegistry.bindTileEntityRenderer(ModTileEntities.DESTABILIZER_TILE.get(), DestabilizerRenderer::new);
 
         EntityRenderers.register(BTBEntityTypes.VOID_CRAWLER.get(), VoidCrawlerRenderer::new);
+        Registrar.getInstance(MOD_ID).clientSetup(event);
 
     }
 

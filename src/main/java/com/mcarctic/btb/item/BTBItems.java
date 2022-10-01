@@ -6,33 +6,32 @@ import com.mcarctic.btb.entity.BTBEntityTypes;
 import com.mcarctic.btb.item.custom.BTBSpawnEggItem;
 import com.mcarctic.btb.item.custom.DestabilizerBlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.zytorx.library.datagen.reflection.annotations.EnglishName;
+import net.zytorx.library.datagen.reflection.annotations.ItemDefinition;
+import net.zytorx.library.registry.RegisteredItem;
+import net.zytorx.library.registry.Registrar;
+
+import java.util.function.Supplier;
 
 public class BTBItems {
 
-    public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, BeneathTheBedrock.MOD_ID);
-
-
-    public static final RegistryObject<Item> BEDROCK_PICKAXE = ITEMS.register("bedrock_pickaxe",
+    @EnglishName(name = "Bedrock Pickaxe")
+    @ItemDefinition(isTool = true)
+    public static final RegisteredItem BEDROCK_PICKAXE = registerItem("bedrock_pickaxe",
             () -> new Item(new Item.Properties().tab(BTBItemGroup.VOID_GROUP)));
 
-    //Spawn Eggs
-    public static final RegistryObject<BTBSpawnEggItem> VOID_CRAWLER_SPAWN_EGG = ITEMS.register("void_crawler_spawn_egg",
+    @EnglishName(name = "Void Crawler Spawn Egg")
+    @ItemDefinition(hasCustomModel = true)
+    public static final RegisteredItem VOID_CRAWLER_SPAWN_EGG = registerItem("void_crawler_spawn_egg",
             () -> new BTBSpawnEggItem(BTBEntityTypes.VOID_CRAWLER, 0x0f141a, 0x0e97a8,
                     new Item.Properties().tab(BTBItemGroup.VOID_GROUP)));
 
-    public static final RegistryObject<Item> DESTABILIZER_BLOCK_ITEM = ITEMS.register("destabilizer_block_item",
-            () -> new DestabilizerBlockItem(BTBBlocks.DESTABILIZER.get(),
+    @ItemDefinition(hasCustomModel = true)
+    public static final RegisteredItem DESTABILIZER_BLOCK_ITEM = registerItem("destabilizer_block_item",
+            () -> new DestabilizerBlockItem(BTBBlocks.DESTABILIZER.getBlock(),
                     new Item.Properties().tab(BTBItemGroup.VOID_GROUP)));
 
-
-    public static void register(IEventBus eventBus) {
-        ITEMS.register(eventBus);
+    private static RegisteredItem registerItem(String name, Supplier<Item> sup) {
+        return Registrar.getInstance(BeneathTheBedrock.MOD_ID).createItem(name, sup);
     }
-
-
 }

@@ -66,3 +66,9 @@ mandatory = true #mandatory
 versionRange = "[1.18-3.0.39,)" #mandatory
 ordering = "NONE"
 side = "BOTH"
+[[dependencies.btb]] #optional
+modId = "zytorxlibrary" #mandatory
+mandatory = true #mandatory
+versionRange = "[1.18.2-0.0.2.0,)" #mandatory
+ordering = "NONE"
+side = "BOTH"

@@ -55,7 +55,7 @@ public class VoidTeleporter implements ITeleporter {
                 }
             }
             if (doSetBlock) {
-                destWorld.setBlockAndUpdate(destinationPos, BTBBlocks.DESTABILIZER.get().defaultBlockState());
+                destWorld.setBlockAndUpdate(destinationPos, BTBBlocks.DESTABILIZER.getBlock().defaultBlockState());
             }
         }
 

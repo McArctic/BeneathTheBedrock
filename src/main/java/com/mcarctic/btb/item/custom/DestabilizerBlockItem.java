@@ -27,7 +27,6 @@ public class DestabilizerBlockItem extends BlockItem implements IAnimatable {
 
     @Override
     public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-        super.initializeClient(consumer);
         consumer.accept(new IItemRenderProperties() {
             private final BlockEntityWithoutLevelRenderer renderer = new DestabilizerItemRenderer();
 

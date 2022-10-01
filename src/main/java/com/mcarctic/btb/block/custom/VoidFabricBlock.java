@@ -32,8 +32,8 @@ public class VoidFabricBlock extends Block {
     private static boolean isReplaceable(BlockState state) {
         return !state.is(Blocks.AIR) &&
                 !state.is(Blocks.BEDROCK) &&
-                !state.is(BTBBlocks.VOID_FABRIC.get()) &&
-                !state.is(BTBBlocks.VOID_FABRIC_NONSPREADABLE.get()) &&
+                !state.is(BTBBlocks.VOID_FABRIC.getBlock()) &&
+                !state.is(BTBBlocks.VOID_FABRIC_NONSPREADABLE.getBlock()) &&
                 !state.is(Blocks.WATER) &&
                 !state.is(Blocks.VOID_AIR) &&
                 !state.is(Blocks.CAVE_AIR) &&
@@ -48,7 +48,7 @@ public class VoidFabricBlock extends Block {
     @Override
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
         if (isVoidDimesnion(worldIn.getLevel())) {
-            worldIn.setBlockAndUpdate(pos, BTBBlocks.VOID_FABRIC_NONSPREADABLE.get().defaultBlockState());
+            worldIn.setBlockAndUpdate(pos, BTBBlocks.VOID_FABRIC_NONSPREADABLE.getBlock().defaultBlockState());
             return;
         }
         if (!worldIn.isAreaLoaded(pos, 3)) {
@@ -59,7 +59,7 @@ public class VoidFabricBlock extends Block {
             BlockPos blockPos = pos.relative(direction);
 
             if (isReplaceable(worldIn.getBlockState(blockPos))) {
-                worldIn.setBlockAndUpdate(blockPos, BTBBlocks.VOID_FABRIC.get().defaultBlockState());
+                worldIn.setBlockAndUpdate(blockPos, BTBBlocks.VOID_FABRIC.getBlock().defaultBlockState());
                 return;
             }
         }

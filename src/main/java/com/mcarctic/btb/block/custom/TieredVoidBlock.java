@@ -34,7 +34,7 @@ public class TieredVoidBlock extends Block {
             pPlayer.causeFoodExhaustion(0.005F);
             dropResources(pState, pLevel, pPos, pBlockEntity, pPlayer, pTool);
         } else {
-            var voidFabric = BTBBlocks.VOID_FABRIC.get();
+            var voidFabric = BTBBlocks.VOID_FABRIC.getBlock();
             voidFabric.playerDestroy(pLevel, pPlayer, pPos, voidFabric.defaultBlockState(), null, pTool);
         }
     }
