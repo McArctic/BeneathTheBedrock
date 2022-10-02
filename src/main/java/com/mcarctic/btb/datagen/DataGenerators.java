@@ -6,9 +6,11 @@ import com.mcarctic.btb.datagen.loot.BTBLootTablesProvider;
 import com.mcarctic.btb.datagen.model.BTBBlockModelProvider;
 import com.mcarctic.btb.datagen.model.BTBItemModelProvider;
 import com.mcarctic.btb.datagen.recipes.BTBRecipeProvider;
+import com.mcarctic.btb.datagen.tags.BTBBlockTagsProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.zytorx.library.datagen.model.ZytorxTextureEnsurer;
 
 @Mod.EventBusSubscriber(modid = BeneathTheBedrock.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
@@ -21,9 +23,10 @@ public class DataGenerators {
         generator.addProvider(new BTBLootTablesProvider(generator));
         generator.addProvider(new BTBEnglishLanguageProvider(generator));
 
-        generator.addProvider(new BTBBlockModelProvider(generator, existingFileHelper));
-        generator.addProvider(new BTBBlockModelProvider(generator, existingFileHelper));
-        generator.addProvider(new BTBItemModelProvider(generator, existingFileHelper));
+        generator.addProvider(new BTBBlockTagsProvider(generator, existingFileHelper));
+        var textureEnsurer = new ZytorxTextureEnsurer(generator, existingFileHelper);
+        generator.addProvider(new BTBBlockModelProvider(generator, existingFileHelper, textureEnsurer));
+        generator.addProvider(new BTBItemModelProvider(generator, existingFileHelper, textureEnsurer));
 
 
     }

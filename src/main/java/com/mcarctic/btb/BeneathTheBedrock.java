@@ -10,7 +10,6 @@ import com.mcarctic.btb.world.biome.BTBBiomes;
 import com.mcarctic.btb.world.dimension.BTBDimensions;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +18,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.zytorx.library.ZytorxLibrary;
 import net.zytorx.library.registry.Registrar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,6 +35,8 @@ public class BeneathTheBedrock {
 
     public BeneathTheBedrock() {
         GeckoLib.initialize();
+
+        var t = ZytorxLibrary.MOD_ID;
 
         var registrar = Registrar.getInstance(MOD_ID);
         registrar.addBlockDeclaration(BTBBlocks.class);
@@ -58,31 +60,15 @@ public class BeneathTheBedrock {
         eventBus.addListener(this::processIMC);
         // Register the doClientStuff method for modloading
         eventBus.addListener(this::doClientStuff);
-
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-
-        //*ModStructures.setupStructures();
-
-
-        //Entity
-        //   SpawnPlacements.register(ModEntityTypes.VOID_CRAWLER.get(), SpawnPlacements.Type.ON_GROUND,
-        //          Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        // do something that can only be done on the client
-        //ClientRegistry.bindTileEntityRenderer(ModTileEntities.DESTABILIZER_TILE.get(), DestabilizerRenderer::new);
-
         EntityRenderers.register(BTBEntityTypes.VOID_CRAWLER.get(), VoidCrawlerRenderer::new);
-        Registrar.getInstance(MOD_ID).clientSetup(event);
-
     }
 
 
