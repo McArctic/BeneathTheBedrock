@@ -1,5 +1,6 @@
 package com.mcarctic.btb;
 
+import com.mcarctic.btb.block.model.TieredVoidBlockModelLoader;
 import com.mcarctic.btb.enchantment.BTBEnchantments;
 import com.mcarctic.btb.entity.renderer.VoidCrawlerRenderer;
 import com.mcarctic.btb.registry.*;
@@ -13,7 +14,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.zytorx.library.ZytorxLibrary;
 import net.zytorx.library.registry.Registrar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,8 +31,6 @@ public class BeneathTheBedrock {
     public BeneathTheBedrock() {
         GeckoLib.initialize();
 
-        var t = ZytorxLibrary.MOD_ID;
-
         var registrar = Registrar.getInstance(MOD_ID);
         registrar.addBlockDeclaration(BTBBlocks.class);
         registrar.addItemDeclaration(BTBItems.class);
@@ -48,6 +46,7 @@ public class BeneathTheBedrock {
         BTBDimensions.register();
 
 
+        eventBus.addListener(TieredVoidBlockModelLoader::register);
         eventBus.addListener(this::setup);
         // Register the enqueueIMC method for modloading
         eventBus.addListener(this::enqueueIMC);

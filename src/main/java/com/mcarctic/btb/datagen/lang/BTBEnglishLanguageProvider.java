@@ -10,5 +10,6 @@ public class BTBEnglishLanguageProvider extends ZytorxEnglishLanguageProvider {
     }
 
     protected void addManualTranslations() {
+        add("itemGroup.voidTab", "Beneath The Bedrock");
     }
 }

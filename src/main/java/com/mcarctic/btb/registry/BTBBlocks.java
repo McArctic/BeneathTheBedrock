@@ -2,6 +2,7 @@ package com.mcarctic.btb.registry;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.block.custom.*;
+import com.mcarctic.btb.data.VoidMagicLevel;
 import com.mcarctic.btb.item.BTBItemGroup;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -21,9 +22,9 @@ public class BTBBlocks {
             VoidFabricBlock::new, BTBItemGroup.VOID_GROUP);
 
     @EnglishName(name = "Void Fabric Wood")
-    @BlockDefinition(toolTypes = {ToolType.PICKAXE})
+    @BlockDefinition(toolTypes = {ToolType.PICKAXE}, hasCustomModel = true)
     public static final RegisteredBlock VOID_FABRIC_WOOD = registerBlock("void_fabric_wood",
-            TieredVoidBlock::new, BTBItemGroup.VOID_GROUP);
+            () -> new TieredVoidBlock(VoidMagicLevel.NONE), BTBItemGroup.VOID_GROUP);
 
     @EnglishName(name = "Void Fabric")
     @BlockDefinition(toolTypes = {ToolType.PICKAXE}, hasItem = false, hasCustomModel = true, hasSpecialDrop = true)
