@@ -14,7 +14,7 @@ public class DestabilizerBlockItemModel extends AnimatedGeoModel<DestabilizerBlo
 
     @Override
     public ResourceLocation getModelLocation(DestabilizerBlockItem animatable) {
-        return new ResourceLocation(BeneathTheBedrock.MOD_ID, "geo/destabilizer.geo.json");
+        return new ResourceLocation(BeneathTheBedrock.MOD_ID, "geo/destabilizer_block_item.geo.json");
     }
 
     @Override
