@@ -1,4 +1,4 @@
-package com.mcarctic.btb.client.renderer;
+package com.mcarctic.btb.entity.renderer;
 
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
@@ -18,7 +18,7 @@ public class BTBRenderType extends RenderStateShard {
     public static RenderType voidEyes(ResourceLocation texture) {
         RenderStateShard.TextureStateShard textureState = new RenderStateShard.TextureStateShard(texture, false, false);
 
-        return create("eyes", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true,
+        return create("void_eyes", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true,
                 RenderType.CompositeState.builder()
                         .setShaderState(RENDERTYPE_ENTITY_ALPHA_SHADER).setTextureState(textureState)
                         .setTransparencyState(ADDITIVE_TRANSPARENCY).setWriteMaskState(COLOR_WRITE)

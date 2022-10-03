@@ -1,7 +1,7 @@
 package com.mcarctic.btb.block.custom;
 
-import com.mcarctic.btb.block.BTBBlocks;
-import com.mcarctic.btb.world.dimension.BTBDimensions;
+import com.mcarctic.btb.registry.BTBBlocks;
+import com.mcarctic.btb.registry.BTBDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

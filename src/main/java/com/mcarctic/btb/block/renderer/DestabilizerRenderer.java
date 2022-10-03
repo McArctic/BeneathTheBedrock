@@ -1,7 +1,7 @@
-package com.mcarctic.btb.client.renderer.tile;
+package com.mcarctic.btb.block.renderer;
 
-import com.mcarctic.btb.client.model.tile.DestabilizerBlockModel;
-import com.mcarctic.btb.entity.custom.DestabilizerBlockEntity;
+import com.mcarctic.btb.block.entity.DestabilizerBlockEntity;
+import com.mcarctic.btb.block.model.DestabilizerBlockModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;

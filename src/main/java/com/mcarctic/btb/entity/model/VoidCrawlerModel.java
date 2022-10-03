@@ -1,4 +1,5 @@
-package com.mcarctic.btb.client.model.entity;
+package com.mcarctic.btb.entity.model;
+
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -71,35 +72,35 @@ public class VoidCrawlerModel<T extends Entity> extends HierarchicalModel<T> {
      * Sets this entity's model rotation angles
      */
     public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        this.head.yRot = pNetHeadYaw * ((float)Math.PI / 180F);
-        this.head.xRot = pHeadPitch * ((float)Math.PI / 180F);
-        float f = ((float)Math.PI / 4F);
-        this.rightHindLeg.zRot = (-(float)Math.PI / 4F);
-        this.leftHindLeg.zRot = ((float)Math.PI / 4F);
+        this.head.yRot = pNetHeadYaw * ((float) Math.PI / 180F);
+        this.head.xRot = pHeadPitch * ((float) Math.PI / 180F);
+        float f = ((float) Math.PI / 4F);
+        this.rightHindLeg.zRot = (-(float) Math.PI / 4F);
+        this.leftHindLeg.zRot = ((float) Math.PI / 4F);
         this.rightMiddleHindLeg.zRot = -0.58119464F;
         this.leftMiddleHindLeg.zRot = 0.58119464F;
         this.rightMiddleFrontLeg.zRot = -0.58119464F;
         this.leftMiddleFrontLeg.zRot = 0.58119464F;
-        this.rightFrontLeg.zRot = (-(float)Math.PI / 4F);
-        this.leftFrontLeg.zRot = ((float)Math.PI / 4F);
+        this.rightFrontLeg.zRot = (-(float) Math.PI / 4F);
+        this.leftFrontLeg.zRot = ((float) Math.PI / 4F);
         float f1 = -0.0F;
-        float f2 = ((float)Math.PI / 8F);
-        this.rightHindLeg.yRot = ((float)Math.PI / 4F);
-        this.leftHindLeg.yRot = (-(float)Math.PI / 4F);
-        this.rightMiddleHindLeg.yRot = ((float)Math.PI / 8F);
-        this.leftMiddleHindLeg.yRot = (-(float)Math.PI / 8F);
-        this.rightMiddleFrontLeg.yRot = (-(float)Math.PI / 8F);
-        this.leftMiddleFrontLeg.yRot = ((float)Math.PI / 8F);
-        this.rightFrontLeg.yRot = (-(float)Math.PI / 4F);
-        this.leftFrontLeg.yRot = ((float)Math.PI / 4F);
+        float f2 = ((float) Math.PI / 8F);
+        this.rightHindLeg.yRot = ((float) Math.PI / 4F);
+        this.leftHindLeg.yRot = (-(float) Math.PI / 4F);
+        this.rightMiddleHindLeg.yRot = ((float) Math.PI / 8F);
+        this.leftMiddleHindLeg.yRot = (-(float) Math.PI / 8F);
+        this.rightMiddleFrontLeg.yRot = (-(float) Math.PI / 8F);
+        this.leftMiddleFrontLeg.yRot = ((float) Math.PI / 8F);
+        this.rightFrontLeg.yRot = (-(float) Math.PI / 4F);
+        this.leftFrontLeg.yRot = ((float) Math.PI / 4F);
         float f3 = -(Mth.cos(pLimbSwing * 0.6662F * 2.0F + 0.0F) * 0.4F) * pLimbSwingAmount;
-        float f4 = -(Mth.cos(pLimbSwing * 0.6662F * 2.0F + (float)Math.PI) * 0.4F) * pLimbSwingAmount;
-        float f5 = -(Mth.cos(pLimbSwing * 0.6662F * 2.0F + ((float)Math.PI / 2F)) * 0.4F) * pLimbSwingAmount;
-        float f6 = -(Mth.cos(pLimbSwing * 0.6662F * 2.0F + ((float)Math.PI * 1.5F)) * 0.4F) * pLimbSwingAmount;
+        float f4 = -(Mth.cos(pLimbSwing * 0.6662F * 2.0F + (float) Math.PI) * 0.4F) * pLimbSwingAmount;
+        float f5 = -(Mth.cos(pLimbSwing * 0.6662F * 2.0F + ((float) Math.PI / 2F)) * 0.4F) * pLimbSwingAmount;
+        float f6 = -(Mth.cos(pLimbSwing * 0.6662F * 2.0F + ((float) Math.PI * 1.5F)) * 0.4F) * pLimbSwingAmount;
         float f7 = Math.abs(Mth.sin(pLimbSwing * 0.6662F + 0.0F) * 0.4F) * pLimbSwingAmount;
-        float f8 = Math.abs(Mth.sin(pLimbSwing * 0.6662F + (float)Math.PI) * 0.4F) * pLimbSwingAmount;
-        float f9 = Math.abs(Mth.sin(pLimbSwing * 0.6662F + ((float)Math.PI / 2F)) * 0.4F) * pLimbSwingAmount;
-        float f10 = Math.abs(Mth.sin(pLimbSwing * 0.6662F + ((float)Math.PI * 1.5F)) * 0.4F) * pLimbSwingAmount;
+        float f8 = Math.abs(Mth.sin(pLimbSwing * 0.6662F + (float) Math.PI) * 0.4F) * pLimbSwingAmount;
+        float f9 = Math.abs(Mth.sin(pLimbSwing * 0.6662F + ((float) Math.PI / 2F)) * 0.4F) * pLimbSwingAmount;
+        float f10 = Math.abs(Mth.sin(pLimbSwing * 0.6662F + ((float) Math.PI * 1.5F)) * 0.4F) * pLimbSwingAmount;
         this.rightHindLeg.yRot += f3;
         this.leftHindLeg.yRot += -f3;
         this.rightMiddleHindLeg.yRot += f4;

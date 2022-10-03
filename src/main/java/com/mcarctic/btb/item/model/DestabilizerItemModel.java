@@ -1,4 +1,4 @@
-package com.mcarctic.btb.item.client;
+package com.mcarctic.btb.item.model;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.item.custom.DestabilizerBlockItem;

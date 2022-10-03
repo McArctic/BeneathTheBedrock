@@ -1,10 +1,10 @@
-package com.mcarctic.btb.client.renderer.entity;
+package com.mcarctic.btb.entity.renderer;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.client.model.entity.VoidCrawlerModel;
-import com.mcarctic.btb.client.model.entity.layers.VoidCrawlerBodyLayer;
-import com.mcarctic.btb.client.model.entity.layers.VoidCrawlerEyesLayer;
 import com.mcarctic.btb.entity.custom.VoidCrawler;
+import com.mcarctic.btb.entity.model.VoidCrawlerModel;
+import com.mcarctic.btb.entity.model.layers.VoidCrawlerBodyLayer;
+import com.mcarctic.btb.entity.model.layers.VoidCrawlerEyesLayer;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class VoidCrawlerRenderer<T extends VoidCrawler> extends MobRenderer<T, VoidCrawlerModel<T>> {
-    private static final ResourceLocation VOIDCRAWLER_LOCATION = new ResourceLocation(BeneathTheBedrock.MOD_ID, "textures/entity/void_crawler.png" );
+    private static final ResourceLocation VOIDCRAWLER_LOCATION = new ResourceLocation(BeneathTheBedrock.MOD_ID, "textures/entity/void_crawler.png");
 
     public VoidCrawlerRenderer(EntityRendererProvider.Context p_174401_) {
         this(p_174401_, ModelLayers.SPIDER);

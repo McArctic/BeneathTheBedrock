@@ -1,6 +1,6 @@
-package com.mcarctic.btb.entity.custom;
+package com.mcarctic.btb.block.entity;
 
-import com.mcarctic.btb.entity.BTBBlockEntities;
+import com.mcarctic.btb.registry.BTBBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;

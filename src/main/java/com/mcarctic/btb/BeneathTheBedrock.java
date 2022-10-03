@@ -1,13 +1,8 @@
 package com.mcarctic.btb;
 
-import com.mcarctic.btb.block.BTBBlocks;
-import com.mcarctic.btb.client.renderer.entity.VoidCrawlerRenderer;
 import com.mcarctic.btb.enchantment.BTBEnchantments;
-import com.mcarctic.btb.entity.BTBBlockEntities;
-import com.mcarctic.btb.entity.BTBEntityTypes;
-import com.mcarctic.btb.item.BTBItems;
-import com.mcarctic.btb.world.biome.BTBBiomes;
-import com.mcarctic.btb.world.dimension.BTBDimensions;
+import com.mcarctic.btb.entity.renderer.VoidCrawlerRenderer;
+import com.mcarctic.btb.registry.*;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.eventbus.api.IEventBus;

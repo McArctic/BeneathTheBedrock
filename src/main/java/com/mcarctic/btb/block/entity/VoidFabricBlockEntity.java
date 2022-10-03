@@ -1,6 +1,6 @@
-package com.mcarctic.btb.tileentity;
+package com.mcarctic.btb.block.entity;
 
-import com.mcarctic.btb.entity.BTBBlockEntities;
+import com.mcarctic.btb.registry.BTBBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;

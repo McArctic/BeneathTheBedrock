@@ -1,6 +1,6 @@
 package com.mcarctic.btb.block.custom;
 
-import com.mcarctic.btb.tileentity.VoidFabricBlockEntity;
+import com.mcarctic.btb.block.entity.VoidFabricBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;

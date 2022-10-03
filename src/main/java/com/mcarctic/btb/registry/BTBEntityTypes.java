@@ -1,4 +1,4 @@
-package com.mcarctic.btb.entity;
+package com.mcarctic.btb.registry;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.entity.custom.VoidCrawler;

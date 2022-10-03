@@ -1,8 +1,8 @@
 package com.mcarctic.btb.events;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.client.renderer.tile.DestabilizerRenderer;
-import com.mcarctic.btb.entity.BTBBlockEntities;
+import com.mcarctic.btb.block.renderer.DestabilizerRenderer;
+import com.mcarctic.btb.registry.BTBBlockEntities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

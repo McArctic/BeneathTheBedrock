@@ -1,4 +1,4 @@
-package com.mcarctic.btb.world.biome;
+package com.mcarctic.btb.registry;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import net.minecraft.core.Registry;

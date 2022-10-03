@@ -1,8 +1,8 @@
 package com.mcarctic.btb.block.custom;
 
-import com.mcarctic.btb.entity.BTBBlockEntities;
 import com.mcarctic.btb.init.VoidTeleporter;
-import com.mcarctic.btb.world.dimension.BTBDimensions;
+import com.mcarctic.btb.registry.BTBBlockEntities;
+import com.mcarctic.btb.registry.BTBDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;

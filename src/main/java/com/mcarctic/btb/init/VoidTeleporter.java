@@ -1,7 +1,7 @@
 package com.mcarctic.btb.init;
 
-import com.mcarctic.btb.block.BTBBlocks;
 import com.mcarctic.btb.block.custom.DestabilizerBlock;
+import com.mcarctic.btb.registry.BTBBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;

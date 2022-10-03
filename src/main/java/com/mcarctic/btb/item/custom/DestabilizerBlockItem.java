@@ -1,6 +1,6 @@
 package com.mcarctic.btb.item.custom;
 
-import com.mcarctic.btb.item.client.DestabilizerItemRenderer;
+import com.mcarctic.btb.item.renderer.DestabilizerItemRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;

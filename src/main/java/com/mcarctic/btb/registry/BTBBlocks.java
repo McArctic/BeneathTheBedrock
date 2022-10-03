@@ -1,4 +1,4 @@
-package com.mcarctic.btb.block;
+package com.mcarctic.btb.registry;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.block.custom.*;

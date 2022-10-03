@@ -1,8 +1,7 @@
-package com.mcarctic.btb.item;
+package com.mcarctic.btb.registry;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.block.BTBBlocks;
-import com.mcarctic.btb.entity.BTBEntityTypes;
+import com.mcarctic.btb.item.BTBItemGroup;
 import com.mcarctic.btb.item.custom.BTBSpawnEggItem;
 import com.mcarctic.btb.item.custom.DestabilizerBlockItem;
 import net.minecraft.world.item.Item;

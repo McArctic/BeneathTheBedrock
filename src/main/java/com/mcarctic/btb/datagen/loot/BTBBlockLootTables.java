@@ -1,7 +1,7 @@
 package com.mcarctic.btb.datagen.loot;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.block.BTBBlocks;
+import com.mcarctic.btb.registry.BTBBlocks;
 import net.zytorx.library.datagen.loot.ZytorxBlockLoot;
 
 public class BTBBlockLootTables extends ZytorxBlockLoot {

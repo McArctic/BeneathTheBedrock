@@ -3,7 +3,7 @@ package com.mcarctic.btb.events;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.enchantment.BTBEnchantments;
-import com.mcarctic.btb.world.dimension.BTBDimensions;
+import com.mcarctic.btb.registry.BTBDimensions;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.enchantment.Enchantment;

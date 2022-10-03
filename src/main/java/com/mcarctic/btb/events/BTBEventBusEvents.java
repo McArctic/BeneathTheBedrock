@@ -2,7 +2,7 @@ package com.mcarctic.btb.events;
 
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.entity.BTBEntityTypes;
+import com.mcarctic.btb.registry.BTBEntityTypes;
 import com.mcarctic.btb.entity.custom.VoidCrawler;
 import com.mcarctic.btb.item.custom.BTBSpawnEggItem;
 import net.minecraft.world.entity.EntityType;

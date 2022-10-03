@@ -28,6 +28,5 @@ public class DataGenerators {
         generator.addProvider(new BTBBlockModelProvider(generator, existingFileHelper, textureEnsurer));
         generator.addProvider(new BTBItemModelProvider(generator, existingFileHelper, textureEnsurer));
 
-
     }
 }

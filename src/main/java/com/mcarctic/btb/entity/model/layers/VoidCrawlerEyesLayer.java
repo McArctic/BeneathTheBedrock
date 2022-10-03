@@ -1,8 +1,8 @@
-package com.mcarctic.btb.client.model.entity.layers;
+package com.mcarctic.btb.entity.model.layers;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.client.model.entity.VoidCrawlerModel;
-import com.mcarctic.btb.client.renderer.BTBRenderType;
+import com.mcarctic.btb.entity.model.VoidCrawlerModel;
+import com.mcarctic.btb.entity.renderer.BTBRenderType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
