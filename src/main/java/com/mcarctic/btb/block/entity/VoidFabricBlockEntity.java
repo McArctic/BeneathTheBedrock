@@ -2,18 +2,35 @@ package com.mcarctic.btb.block.entity;
 
 import com.mcarctic.btb.registry.BTBBlockEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.util.INBTSerializable;
 
-public class VoidFabricBlockEntity extends BlockEntity {
+public class VoidFabricBlockEntity extends BlockEntity implements INBTSerializable<CompoundTag> {
+
+
+    private BlockState state;
 
     public VoidFabricBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(BTBBlockEntities.VOID_FABRIC_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, VoidFabricBlockEntity pBlockEntity) {
+    public BlockState getFormerState() {
+        return state;
+    }
 
+    public void setFormerState(BlockState state) {
+        this.state = state;
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        return super.serializeNBT();
+    }
+
+    @Override
+    public void deserializeNBT(CompoundTag nbt) {
     }
 }
 
