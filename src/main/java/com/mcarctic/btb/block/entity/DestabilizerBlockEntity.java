@@ -26,6 +26,7 @@ public class DestabilizerBlockEntity extends BlockEntity implements IAnimatable 
 
     }
 
+
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.destabilizer.idle", true));
 

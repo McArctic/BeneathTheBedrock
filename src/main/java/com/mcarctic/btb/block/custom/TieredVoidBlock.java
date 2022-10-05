@@ -11,7 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -21,7 +20,7 @@ import net.minecraft.world.level.material.MaterialColor;
 
 import javax.annotation.Nullable;
 
-public class TieredVoidBlock extends Block implements EntityBlock {
+public class TieredVoidBlock extends Block {
 
     private final VoidMagicLevel neededLevel;
 
@@ -52,11 +51,5 @@ public class TieredVoidBlock extends Block implements EntityBlock {
             var voidFabric = BTBBlocks.VOID_FABRIC.getBlock();
             voidFabric.playerDestroy(pLevel, pPlayer, pPos, voidFabric.defaultBlockState(), null, pTool);
         }
-    }
-
-    @org.jetbrains.annotations.Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return null;
     }
 }

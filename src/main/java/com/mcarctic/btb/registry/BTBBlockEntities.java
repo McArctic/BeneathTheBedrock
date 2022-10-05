@@ -2,7 +2,6 @@ package com.mcarctic.btb.registry;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.block.entity.DestabilizerBlockEntity;
-import com.mcarctic.btb.block.entity.TieredVoidBlockEntity;
 import com.mcarctic.btb.block.entity.VoidFabricBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,11 +21,6 @@ public class BTBBlockEntities {
             BLOCK_ENTITIES.register("void_fabric_block_entity", () ->
                     BlockEntityType.Builder.of(VoidFabricBlockEntity::new,
                             BTBBlocks.VOID_FABRIC_TEMP.getBlock()).build(null));
-
-    public static final RegistryObject<BlockEntityType<TieredVoidBlockEntity>> TIERED_VOID_BLOCK_ENTITY =
-            BLOCK_ENTITIES.register("tiered_void_block_entity", () ->
-                    BlockEntityType.Builder.of(TieredVoidBlockEntity::new,
-                            BTBBlocks.VOID_FABRIC_WOOD.getBlock()).build(null));
 
     public static final RegistryObject<BlockEntityType<DestabilizerBlockEntity>> DESTABILIZER_BLOCK_ENTITY =
             BLOCK_ENTITIES.register("destabilizer_block_entity", () ->
