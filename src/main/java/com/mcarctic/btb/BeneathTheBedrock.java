@@ -5,7 +5,10 @@ import com.mcarctic.btb.enchantment.BTBEnchantments;
 import com.mcarctic.btb.entity.renderer.VoidCrawlerRenderer;
 import com.mcarctic.btb.registry.*;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -59,6 +62,9 @@ public class BeneathTheBedrock {
     private void setup(final FMLCommonSetupEvent event) {
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+
+        SpawnPlacements.register(BTBEntityTypes.VOID_CRAWLER.get(), SpawnPlacements.Type.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

@@ -27,6 +27,7 @@ public class VoidFabricTempBlock extends BaseEntityBlock {
 
     public VoidFabricTempBlock() {
         super(BlockBehaviour.Properties.of(Material.GRASS, MaterialColor.COLOR_BLACK)
+                .randomTicks()
                 .requiresCorrectToolForDrops()
                 .strength(5f)
                 .sound(SoundType.WOOL));
