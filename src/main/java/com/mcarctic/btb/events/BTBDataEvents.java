@@ -5,11 +5,13 @@ import com.mcarctic.btb.data.VoidMagicLevel;
 import com.mcarctic.btb.data.playerdata.PlayerMagicLevel;
 import com.mcarctic.btb.data.playerdata.PlayerMagicLevelProvider;
 import com.mcarctic.btb.registry.BTBDimensions;
+import com.mcarctic.btb.util.CapabilityHelper;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,31 +19,33 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = BeneathTheBedrock.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BTBDataEvents {
-    private static final int tick = 0;
-
     @SubscribeEvent
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
 
         //If is not instance of Player
-        if (!(event.getObject() instanceof Player player)) {
+        if (!(event.getObject() instanceof ServerPlayer player)) {
             return;
         }
 
         if (!player.getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).isPresent()) {
             event.addCapability(new ResourceLocation(BeneathTheBedrock.MOD_ID, "voidmagic"), new PlayerMagicLevelProvider());
         }
+        player.getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).ifPresent(cap -> cap.update(player));
     }
 
     @SubscribeEvent
     public static void onClonePlayer(PlayerEvent.Clone event) {
+
         event.getOriginal().reviveCaps();
 
         event.getOriginal().getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).ifPresent(
                 oldPlayer ->
-                        event.getOriginal().getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).ifPresent(newPlayer ->
-                                newPlayer.copyFrom(oldPlayer)
-                        )
-        );
+                        event.getOriginal().getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).ifPresent(newPlayer -> {
+                            newPlayer.copyFrom(oldPlayer);
+                            if (event.getPlayer() instanceof ServerPlayer player) {
+                                newPlayer.update(player);
+                            }
+                        }));
         event.getOriginal().invalidateCaps();
     }
 
@@ -55,10 +59,21 @@ public class BTBDataEvents {
         if (event.getTo() != BTBDimensions.VOID) {
             return;
         }
-        event.getPlayer().getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).ifPresent(capability -> {
-            if (capability.getLevel() == VoidMagicLevel.NONE) {
-                capability.levelUp();
-            }
-        });
+        if (!(event.getPlayer() instanceof ServerPlayer serverPlayer)) {
+            return;
+        }
+
+        var level = CapabilityHelper.getMagicLevel(serverPlayer);
+        if (level == VoidMagicLevel.NONE) {
+            CapabilityHelper.setMagicLevel(serverPlayer, VoidMagicLevel.CORRUPTED);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onJoin(EntityJoinWorldEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) {
+            return;
+        }
+        CapabilityHelper.setMagicLevel(player, CapabilityHelper.getMagicLevel(player));
     }
 }

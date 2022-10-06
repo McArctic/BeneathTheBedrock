@@ -1,7 +1,10 @@
 package com.mcarctic.btb.data.playerdata;
 
 import com.mcarctic.btb.data.VoidMagicLevel;
+import com.mcarctic.btb.networking.BTBNetworkMessages;
+import com.mcarctic.btb.networking.sync.VoidMagicLevelDataSyncS2CPacket;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 
 public class PlayerMagicLevel {
 
@@ -11,8 +14,8 @@ public class PlayerMagicLevel {
         return level;
     }
 
-    public void levelUp() {
-        level = level.getLevelAbove();
+    public void setLevel(VoidMagicLevel level) {
+        this.level = level;
     }
 
     public void copyFrom(PlayerMagicLevel sourcce) {
@@ -25,5 +28,9 @@ public class PlayerMagicLevel {
 
     public void loadNBTData(CompoundTag nbt) {
         level = VoidMagicLevel.valueOf(nbt.getString("level"));
+    }
+
+    public void update(ServerPlayer player) {
+        BTBNetworkMessages.sendToPlayer(new VoidMagicLevelDataSyncS2CPacket(level), player);
     }
 }

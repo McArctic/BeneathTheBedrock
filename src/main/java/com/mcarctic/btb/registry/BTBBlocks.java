@@ -24,7 +24,12 @@ public class BTBBlocks {
     @EnglishName(name = "Void Fabric Wood")
     @BlockDefinition(toolTypes = {ToolType.PICKAXE}, hasCustomModel = true)
     public static final RegisteredBlock VOID_FABRIC_WOOD = registerBlock("void_fabric_wood",
-            () -> new TieredVoidBlock(VoidMagicLevel.NONE), BTBItemGroup.VOID_GROUP);
+            () -> new TieredVoidBlock(VoidMagicLevel.CORRUPTED), BTBItemGroup.VOID_GROUP);
+
+    @EnglishName(name = "Void Fabric Planks")
+    @BlockDefinition(toolTypes = {ToolType.PICKAXE}, hasCustomModel = true)
+    public static final RegisteredBlock VOID_FABRIC_PLANKS = registerBlock("void_fabric_planks",
+            () -> new TieredVoidBlock(VoidMagicLevel.CHEAT), BTBItemGroup.VOID_GROUP);
 
     @EnglishName(name = "Void Fabric")
     @BlockDefinition(toolTypes = {ToolType.PICKAXE}, hasItem = false, hasCustomModel = true, hasSpecialDrop = true)

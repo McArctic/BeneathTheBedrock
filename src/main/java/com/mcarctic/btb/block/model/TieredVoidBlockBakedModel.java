@@ -5,12 +5,11 @@ import com.mcarctic.btb.registry.BTBBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.model.data.IDynamicBakedModel;
@@ -20,17 +19,82 @@ import net.minecraftforge.client.model.pipeline.IVertexConsumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
 
-    private static final BlockState FALLBACK = BTBBlocks.VOID_FABRIC.getBlock().defaultBlockState();
+    private static TextureAtlasSprite FALLBACK;
+    private final ResourceLocation location;
+    private TextureAtlasSprite texture;
+
+    private TieredVoidBlock block;
+
+    public TieredVoidBlockBakedModel(ResourceLocation location) {
+        this.location = location;
+    }
+
+    @NotNull
+    @Override
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
+        init(state);
+
+        return getTextured(side, getTexture());
+    }
+
+    private TextureAtlasSprite getTexture() {
+        if (block == null || !block.canPlayerSee()) {
+            return FALLBACK;
+        }
+        return texture;
+    }
+
+    private void init(BlockState state) {
+        if (FALLBACK == null) {
+            var location = BTBBlocks.VOID_FABRIC.getBlock().getRegistryName();
+            FALLBACK = getTexture(new ResourceLocation(location.getNamespace(), "block/" + location.getPath()));
+        }
+        if (texture == null) {
+            texture = getTexture(location);
+        }
+        if (block == null) {
+            block = (TieredVoidBlock) state.getBlock();
+        }
+    }
+
+    @Override
+    public boolean useAmbientOcclusion() {
+        return true;
+    }
+
+    @Override
+    public boolean isGui3d() {
+        return false;
+    }
+
+    @Override
+    public boolean usesBlockLight() {
+        return false;
+    }
+
+    @Override
+    public boolean isCustomRenderer() {
+        return false;
+    }
+
+    @Override
+    public TextureAtlasSprite getParticleIcon() {
+        return getTexture();
+    }
+
+    @Override
+    public ItemOverrides getOverrides() {
+        return ItemOverrides.EMPTY;
+    }
 
     public static TextureAtlasSprite getTexture(ResourceLocation resource) {
-        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(resource);
+        return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(resource);
     }
 
     private static List<BakedQuad> getTextured(Direction side, TextureAtlasSprite texture) {
@@ -44,6 +108,8 @@ public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
                 case WEST -> quads.add(createQuad(v(0, 1, 0), v(0, 0, 0), v(0, 0, 1), v(0, 1, 1), texture));
                 case EAST -> quads.add(createQuad(v(1, 1, 1), v(1, 0, 1), v(1, 0, 0), v(1, 1, 0), texture));
             }
+        } else {
+
         }
         return quads;
     }
@@ -95,49 +161,5 @@ public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
                     builder.put(e);
             }
         }
-    }
-
-    @NotNull
-    @Override
-    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        if (!(state.getBlock() instanceof TieredVoidBlock tiered) || !tiered.canPlayerSee()) {
-            return getModel(FALLBACK).getQuads(FALLBACK, side, rand, null);
-        }
-
-        return getTextured(side, getTexture(state.getBlock().getRegistryName()));
-    }
-
-    private BakedModel getModel(@Nonnull BlockState facadeState) {
-        return Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getBlockModel(facadeState);
-    }
-
-    @Override
-    public boolean useAmbientOcclusion() {
-        return true;
-    }
-
-    @Override
-    public boolean isGui3d() {
-        return false;
-    }
-
-    @Override
-    public boolean usesBlockLight() {
-        return false;
-    }
-
-    @Override
-    public boolean isCustomRenderer() {
-        return false;
-    }
-
-    @Override
-    public TextureAtlasSprite getParticleIcon() {
-        return null;
-    }
-
-    @Override
-    public ItemOverrides getOverrides() {
-        return ItemOverrides.EMPTY;
     }
 }
