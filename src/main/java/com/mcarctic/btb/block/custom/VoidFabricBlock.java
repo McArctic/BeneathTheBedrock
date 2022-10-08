@@ -1,5 +1,6 @@
 package com.mcarctic.btb.block.custom;
 
+import com.mcarctic.btb.data.tags.BTBBlockTags;
 import com.mcarctic.btb.registry.BTBBlocks;
 import com.mcarctic.btb.registry.BTBDimensions;
 import net.minecraft.core.BlockPos;
@@ -7,7 +8,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,15 +30,7 @@ public class VoidFabricBlock extends Block {
     }
 
     private static boolean isReplaceable(BlockState state) {
-        return !state.is(Blocks.AIR) &&
-                !state.is(Blocks.BEDROCK) &&
-                !state.is(BTBBlocks.VOID_FABRIC.getBlock()) &&
-                !state.is(BTBBlocks.VOID_FABRIC_NONSPREADABLE.getBlock()) &&
-                !state.is(Blocks.WATER) &&
-                !state.is(Blocks.VOID_AIR) &&
-                !state.is(Blocks.CAVE_AIR) &&
-                !state.is(Blocks.WATER) &&
-                !state.is(Blocks.LAVA);
+        return !state.is(BTBBlockTags.NON_CORRUPTIBLES);
     }
 
     private static boolean isVoidDimesnion(Level world) {
