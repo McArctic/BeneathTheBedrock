@@ -1,6 +1,6 @@
 package com.mcarctic.btb.item.custom;
 
-import com.mcarctic.btb.item.renderer.DestabilizerItemRenderer;
+import com.mcarctic.btb.item.renderer.DestabilizerBlockItemRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -32,7 +32,7 @@ public class DestabilizerBlockItem extends BlockItem implements IAnimatable {
     @Override
     public void initializeClient(Consumer<IItemRenderProperties> consumer) {
         consumer.accept(new IItemRenderProperties() {
-            private final BlockEntityWithoutLevelRenderer renderer = new DestabilizerItemRenderer();
+            private final BlockEntityWithoutLevelRenderer renderer = new DestabilizerBlockItemRenderer();
 
             @Override
             public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
