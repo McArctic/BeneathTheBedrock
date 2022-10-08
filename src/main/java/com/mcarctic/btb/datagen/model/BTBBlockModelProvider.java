@@ -14,6 +14,5 @@ public class BTBBlockModelProvider extends ZytorxBlockStateProvider {
 
     @Override
     protected void addStatesAndModels() {
-
     }
 }

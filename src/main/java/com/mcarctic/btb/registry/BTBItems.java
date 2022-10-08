@@ -29,7 +29,7 @@ public class BTBItems {
     public static final RegisteredItem DESTABILIZER_BLOCK_ITEM = registerItem("destabilizer_block_item",
             () -> new DestabilizerBlockItem(BTBBlocks.DESTABILIZER.getBlock(),
                     new Item.Properties().tab(BTBItemGroup.VOID_GROUP)));
-
+    
     private static RegisteredItem registerItem(String name, Supplier<Item> sup) {
         return Registrar.getInstance(BeneathTheBedrock.MOD_ID).createItem(name, sup);
     }
