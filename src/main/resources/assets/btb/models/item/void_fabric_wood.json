@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "layer0": "btb:block/void_fabric_wood"
+  }
+}

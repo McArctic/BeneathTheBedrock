@@ -16,6 +16,7 @@ import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 import net.minecraftforge.client.model.pipeline.IVertexConsumer;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,20 +26,36 @@ import java.util.Random;
 
 public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
 
+    private static final String ITEM_MARKER = "#inventory";
+    private static final String BLOCK_MARKER = "block/";
     private static TextureAtlasSprite FALLBACK;
     private final ResourceLocation location;
+    private final TieredVoidBlock block;
     private TextureAtlasSprite texture;
 
-    private TieredVoidBlock block;
-
     public TieredVoidBlockBakedModel(ResourceLocation location) {
+
+        var loc = location.toString();
+        if (loc.endsWith(ITEM_MARKER)) {
+            location = new ResourceLocation(loc.substring(0, loc.length() - ITEM_MARKER.length()));
+        }
+
+        if (!location.getPath().startsWith(BLOCK_MARKER)) {
+            location = new ResourceLocation(location.getNamespace(), BLOCK_MARKER + location.getPath());
+        }
+
+        var blockLocation = new ResourceLocation(location.getNamespace(), location.getPath().replaceFirst(BLOCK_MARKER, ""));
+
+
+        var holder = ForgeRegistries.BLOCKS.getHolder(blockLocation);
+        this.block = (TieredVoidBlock) holder.get().value();
         this.location = location;
     }
 
     @NotNull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        init(state);
+        init();
 
         return getTextured(side, getTexture());
     }
@@ -50,16 +67,13 @@ public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
         return texture;
     }
 
-    private void init(BlockState state) {
+    private void init() {
         if (FALLBACK == null) {
             var location = BTBBlocks.VOID_FABRIC.getBlock().getRegistryName();
             FALLBACK = getTexture(new ResourceLocation(location.getNamespace(), "block/" + location.getPath()));
         }
         if (texture == null) {
             texture = getTexture(location);
-        }
-        if (block == null) {
-            block = (TieredVoidBlock) state.getBlock();
         }
     }
 
