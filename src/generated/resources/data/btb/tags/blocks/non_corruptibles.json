@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:air",
+    "minecraft:bedrock",
+    "minecraft:water",
+    "minecraft:void_air",
+    "minecraft:cave_air",
+    "minecraft:lava",
+    "minecraft:bubble_column",
+    "minecraft:barrier",
+    "btb:destabilizer",
+    "btb:void_fabric",
+    "btb:void_fabric_nonspreadable"
+  ]
+}
