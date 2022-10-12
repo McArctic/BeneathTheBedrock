@@ -33,13 +33,13 @@ public class VoidFabricBlock extends Block {
         return !state.is(BTBBlockTags.NON_CORRUPTIBLES);
     }
 
-    private static boolean isVoidDimesnion(Level world) {
+    private static boolean isVoidDimension(Level world) {
         return world.dimension() == BTBDimensions.VOID;
     }
 
     @Override
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
-        if (isVoidDimesnion(worldIn.getLevel())) {
+        if (isVoidDimension(worldIn.getLevel())) {
             worldIn.setBlockAndUpdate(pos, BTBBlocks.VOID_FABRIC_NONSPREADABLE.getBlock().defaultBlockState());
             return;
         }
