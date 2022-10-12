@@ -5,6 +5,7 @@ import com.mcarctic.btb.registry.BTBBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
@@ -31,25 +32,22 @@ public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
     private static TextureAtlasSprite FALLBACK;
     private final ResourceLocation location;
     private final TieredVoidBlock block;
+    private final ItemTransforms transforms;
     private TextureAtlasSprite texture;
 
-    public TieredVoidBlockBakedModel(ResourceLocation location) {
+    public TieredVoidBlockBakedModel(ResourceLocation location, ItemTransforms transforms) {
 
-        var loc = location.toString();
-        if (loc.endsWith(ITEM_MARKER)) {
-            location = new ResourceLocation(loc.substring(0, loc.length() - ITEM_MARKER.length()));
-        }
+        location = new ResourceLocation(location.toString().split("#")[0]);
 
         if (!location.getPath().startsWith(BLOCK_MARKER)) {
             location = new ResourceLocation(location.getNamespace(), BLOCK_MARKER + location.getPath());
         }
-
         var blockLocation = new ResourceLocation(location.getNamespace(), location.getPath().replaceFirst(BLOCK_MARKER, ""));
-
 
         var holder = ForgeRegistries.BLOCKS.getHolder(blockLocation);
         this.block = (TieredVoidBlock) holder.get().value();
         this.location = location;
+        this.transforms = transforms;
     }
 
     @NotNull
@@ -77,6 +75,7 @@ public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
         }
     }
 
+
     @Override
     public boolean useAmbientOcclusion() {
         return true;
@@ -84,7 +83,7 @@ public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
 
     @Override
     public boolean isGui3d() {
-        return false;
+        return true;
     }
 
     @Override
@@ -105,6 +104,11 @@ public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
     @Override
     public ItemOverrides getOverrides() {
         return ItemOverrides.EMPTY;
+    }
+
+    @Override
+    public ItemTransforms getTransforms() {
+        return this.transforms;
     }
 
     public static TextureAtlasSprite getTexture(ResourceLocation resource) {
