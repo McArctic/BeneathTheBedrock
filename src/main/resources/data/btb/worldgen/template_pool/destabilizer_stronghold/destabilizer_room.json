@@ -1,0 +1,15 @@
+{
+  "name": "btb:destabilizer_stronghold/destabilizer_room",
+  "fallback": "btb:destabilizer_stronghold/terminator",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "btb:destabilizer_stronghold/rooms/destabilizer_room",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

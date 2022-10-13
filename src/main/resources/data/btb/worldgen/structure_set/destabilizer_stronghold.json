@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "btb:destabilizer_stronghold",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 754335125,
+    "spacing": 25,
+    "separation": 10,
+    "type": "minecraft:random_spread"
+  }
+}
