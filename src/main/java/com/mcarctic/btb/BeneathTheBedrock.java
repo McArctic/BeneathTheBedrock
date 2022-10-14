@@ -5,6 +5,7 @@ import com.mcarctic.btb.enchantment.BTBEnchantments;
 import com.mcarctic.btb.entity.renderer.VoidCrawlerRenderer;
 import com.mcarctic.btb.networking.BTBNetworkMessages;
 import com.mcarctic.btb.registry.*;
+import com.mcarctic.btb.world.structure.BTBStructures;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Monster;
@@ -29,7 +30,7 @@ import java.util.stream.Collectors;
 public class BeneathTheBedrock {
     public static final String MOD_ID = "btb";
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public BeneathTheBedrock() {
         GeckoLib.initialize();
@@ -47,6 +48,7 @@ public class BeneathTheBedrock {
         BTBEntityTypes.register(eventBus);
         BTBEnchantments.register(eventBus);
         BTBDimensions.register();
+        BTBStructures.register(eventBus);
 
 
         eventBus.addListener(TieredVoidBlockModelLoader::register);

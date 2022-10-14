@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:village",
+  "type": "btb:destabilizer_strongholds",
   "config": {
     "start_pool": "btb:destabilizer_stronghold/destabilizer_room",
     "size": 7

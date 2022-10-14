@@ -9,6 +9,11 @@
     "salt": 754335125,
     "spacing": 25,
     "separation": 10,
-    "type": "minecraft:random_spread"
+    "type": "minecraft:random_spread",
+    "locate_offset": [
+      0,
+      -16,
+      0
+    ]
   }
 }
