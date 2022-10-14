@@ -3,7 +3,7 @@
   "fallback": "btb:destabilizer_stronghold/terminator",
   "elements": [
     {
-      "weight": 1,
+      "weight": 6,
       "element": {
         "location": "btb:destabilizer_stronghold/paths/diamond_path",
         "processors": "minecraft:empty",
@@ -12,7 +12,7 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 6,
       "element": {
         "location": "btb:destabilizer_stronghold/paths/gold_path",
         "processors": "minecraft:empty",
@@ -21,7 +21,7 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 6,
       "element": {
         "location": "btb:destabilizer_stronghold/paths/iron_path",
         "processors": "minecraft:empty",
@@ -30,7 +30,7 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 8,
       "element": {
         "location": "btb:destabilizer_stronghold/paths/iron_corner",
         "processors": "minecraft:empty",
@@ -39,7 +39,7 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 8,
       "element": {
         "location": "btb:destabilizer_stronghold/paths/gold_corner",
         "processors": "minecraft:empty",
@@ -48,9 +48,18 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 8,
       "element": {
         "location": "btb:destabilizer_stronghold/paths/diamond_corner",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "btb:destabilizer_stronghold/paths/stairs1",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
