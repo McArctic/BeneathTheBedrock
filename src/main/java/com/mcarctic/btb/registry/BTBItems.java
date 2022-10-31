@@ -3,6 +3,7 @@ package com.mcarctic.btb.registry;
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.item.BTBItemGroup;
 import com.mcarctic.btb.item.custom.BTBSpawnEggItem;
+import com.mcarctic.btb.item.custom.ClearingGunItem;
 import com.mcarctic.btb.item.custom.DestabilizerBlockItem;
 import net.minecraft.world.item.Item;
 import net.zytorx.library.datagen.reflection.annotations.EnglishName;
@@ -26,10 +27,15 @@ public class BTBItems {
                     new Item.Properties().tab(BTBItemGroup.VOID_GROUP)));
 
     @ItemDefinition(hasCustomModel = true)
-    public static final RegisteredItem DESTABILIZER_BLOCK_ITEM = registerItem("destabilizer_block_item",
+    public static final RegisteredItem DESTABILIZER_BLOCK_ITEM = registerItem("destabilizer",
             () -> new DestabilizerBlockItem(BTBBlocks.DESTABILIZER.getBlock(),
                     new Item.Properties().tab(BTBItemGroup.VOID_GROUP)));
-    
+
+    @EnglishName(name = "Clearing Gun")
+    @ItemDefinition(isTool = true)
+    public static final RegisteredItem CLEARING_GUN = registerItem("clearing_gun",
+            () -> new ClearingGunItem(new Item.Properties().tab(BTBItemGroup.VOID_GROUP), 10));
+
     private static RegisteredItem registerItem(String name, Supplier<Item> sup) {
         return Registrar.getInstance(BeneathTheBedrock.MOD_ID).createItem(name, sup);
     }

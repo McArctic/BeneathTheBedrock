@@ -2,12 +2,14 @@ package com.mcarctic.btb.block.custom;
 
 import com.mcarctic.btb.data.chunkdata.CorruptedChunkProvider;
 import com.mcarctic.btb.data.tags.BTBBlockTags;
+import com.mcarctic.btb.entity.custom.projectiles.UncorruptProjectile;
 import com.mcarctic.btb.registry.BTBBlocks;
 import com.mcarctic.btb.registry.BTBDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -26,7 +29,6 @@ import java.util.Random;
 
 public class VoidFabricTempBlock extends Block {
     private static final List<Direction> directions = Arrays.asList(Direction.WEST, Direction.SOUTH, Direction.EAST, Direction.NORTH, Direction.DOWN, Direction.UP);
-    private boolean reverse = false;
 
     public VoidFabricTempBlock() {
         super(BlockBehaviour.Properties.of(Material.GRASS, MaterialColor.COLOR_BLACK)
@@ -46,9 +48,32 @@ public class VoidFabricTempBlock extends Block {
 
     @Override
     public void playerDestroy(Level pLevel, Player pPlayer, BlockPos pPos, BlockState pState, @Nullable BlockEntity pBlockEntity, ItemStack pTool) {
-        reverse = !reverse;
         super.playerDestroy(pLevel, pPlayer, pPos, pState, pBlockEntity, pTool);
     }
+
+    @Override
+    public void onProjectileHit(Level pLevel, BlockState pState, BlockHitResult pHit, Projectile pProjectile) {
+        if (pLevel.isClientSide()) {
+            return;
+        }
+
+        if (!(pProjectile instanceof UncorruptProjectile)) {
+            return;
+        }
+
+        var pos = pHit.getBlockPos();
+        if (!pLevel.getBlockState(pos).is(this)) {
+            return;
+        }
+
+
+        if (pLevel.getBlockState(pos).is(this)) {
+            pLevel.getChunkAt(pos).getCapability(CorruptedChunkProvider.CORRUPTED_CHUNK).ifPresent(cap -> {
+                pLevel.setBlockAndUpdate(pos, cap.getAndRemoveFormerState(pos));
+            });
+        }
+    }
+
 
     @Override
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
@@ -57,14 +82,6 @@ public class VoidFabricTempBlock extends Block {
             return;
         }
         if (!worldIn.isAreaLoaded(pos, 3)) {
-            return;
-        }
-
-        if (reverse) {
-            worldIn.getChunkAt(pos).getCapability(CorruptedChunkProvider.CORRUPTED_CHUNK).ifPresent(cap -> {
-                var former = cap.getAndRemoveFormerState(pos);
-                worldIn.setBlockAndUpdate(pos, former);
-            });
             return;
         }
 

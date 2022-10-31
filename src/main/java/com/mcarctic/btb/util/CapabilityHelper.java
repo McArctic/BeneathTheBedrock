@@ -6,6 +6,10 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class CapabilityHelper {
 
+    public static void updateAll(ServerPlayer player) {
+        player.getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).ifPresent(cap -> cap.update(player));
+    }
+
     public static VoidMagicLevel getMagicLevel(ServerPlayer player) {
         var cap = player.getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL);
         if (!cap.isPresent()) {

@@ -13,7 +13,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -82,10 +81,9 @@ public class BTBDataEvents {
     }
 
     @SubscribeEvent
-    public static void onJoin(EntityJoinWorldEvent event) {
-        if (!(event.getEntity() instanceof ServerPlayer player)) {
-            return;
+    public static void onJoin(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            CapabilityHelper.updateAll(player);
         }
-        CapabilityHelper.setMagicLevel(player, CapabilityHelper.getMagicLevel(player));
     }
 }

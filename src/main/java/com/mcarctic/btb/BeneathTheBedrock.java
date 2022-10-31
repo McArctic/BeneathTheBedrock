@@ -2,6 +2,7 @@ package com.mcarctic.btb;
 
 import com.mcarctic.btb.block.model.TieredVoidBlockModelLoader;
 import com.mcarctic.btb.enchantment.BTBEnchantments;
+import com.mcarctic.btb.entity.renderer.UncorruptProjectileRenderer;
 import com.mcarctic.btb.entity.renderer.VoidCrawlerRenderer;
 import com.mcarctic.btb.networking.BTBNetworkMessages;
 import com.mcarctic.btb.registry.*;
@@ -71,6 +72,7 @@ public class BeneathTheBedrock {
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         EntityRenderers.register(BTBEntityTypes.VOID_CRAWLER.get(), VoidCrawlerRenderer::new);
+        EntityRenderers.register(BTBEntityTypes.UNCORRUPT_PROJECTILE.get(), UncorruptProjectileRenderer::new);
     }
 
 

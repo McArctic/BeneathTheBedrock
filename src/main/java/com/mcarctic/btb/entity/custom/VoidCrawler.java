@@ -1,8 +1,6 @@
 package com.mcarctic.btb.entity.custom;
 
 
-import java.util.Random;
-import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -16,28 +14,16 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -45,11 +31,23 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class VoidCrawler extends Monster {
     private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(VoidCrawler.class, EntityDataSerializers.BYTE);
 
     public VoidCrawler(EntityType<? extends VoidCrawler> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+    }
+
+    public static AttributeSupplier createAttributes() {
+
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 16.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.20000001192092896D)
+                .add(Attributes.ATTACK_DAMAGE, 6.0D)
+                .add(Attributes.FOLLOW_RANGE, 60D).build();
     }
 
     @Override
@@ -69,7 +67,7 @@ public class VoidCrawler extends Monster {
      * Returns the Y offset from the entity's position for any entity riding this one.
      */
     public double getPassengersRidingOffset() {
-        return (double)(this.getBbHeight() * 0.5F);
+        return this.getBbHeight() * 0.5F;
     }
 
     @Override
@@ -80,7 +78,7 @@ public class VoidCrawler extends Monster {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_FLAGS_ID, (byte)0);
+        this.entityData.define(DATA_FLAGS_ID, (byte) 0);
     }
 
     /**
@@ -92,14 +90,6 @@ public class VoidCrawler extends Monster {
             this.setClimbing(this.horizontalCollision);
         }
 
-    }
-
-    public static AttributeSupplier createAttributes() {
-        return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 16.0D)
-                .add(Attributes.MOVEMENT_SPEED, (double)0.20000001192092896D)
-                .add(Attributes.ATTACK_DAMAGE, 6.0D)
-                .add(Attributes.FOLLOW_RANGE, 60D).build();
     }
 
     @Override
@@ -157,9 +147,9 @@ public class VoidCrawler extends Monster {
     public void setClimbing(boolean pClimbing) {
         byte b0 = this.entityData.get(DATA_FLAGS_ID);
         if (pClimbing) {
-            b0 = (byte)(b0 | 1);
+            b0 = (byte) (b0 | 1);
         } else {
-            b0 = (byte)(b0 & -2);
+            b0 = (byte) (b0 & -2);
         }
 
         this.entityData.set(DATA_FLAGS_ID, b0);
@@ -168,22 +158,16 @@ public class VoidCrawler extends Monster {
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
-        if (pLevel.getRandom().nextInt(100) == 0) {
-            Skeleton skeleton = EntityType.SKELETON.create(this.level);
-            skeleton.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-            skeleton.finalizeSpawn(pLevel, pDifficulty, pReason, (SpawnGroupData)null, (CompoundTag)null);
-            skeleton.startRiding(this);
-        }
 
         if (pSpawnData == null) {
             pSpawnData = new VoidCrawlerEffectsGroupData();
             if (pLevel.getDifficulty() == Difficulty.HARD && pLevel.getRandom().nextFloat() < 0.1F * pDifficulty.getSpecialMultiplier()) {
-                ((VoidCrawlerEffectsGroupData)pSpawnData).setRandomEffect(pLevel.getRandom());
+                ((VoidCrawlerEffectsGroupData) pSpawnData).setRandomEffect(pLevel.getRandom());
             }
         }
 
         if (pSpawnData instanceof VoidCrawlerEffectsGroupData) {
-            MobEffect mobeffect = ((VoidCrawlerEffectsGroupData)pSpawnData).effect;
+            MobEffect mobeffect = ((VoidCrawlerEffectsGroupData) pSpawnData).effect;
             if (mobeffect != null) {
                 this.addEffect(new MobEffectInstance(mobeffect, Integer.MAX_VALUE));
             }
@@ -216,7 +200,7 @@ public class VoidCrawler extends Monster {
         public boolean canContinueToUse() {
             float f = this.mob.getBrightness();
             if (f >= 0.5F && this.mob.getRandom().nextInt(100) == 0) {
-                this.mob.setTarget((LivingEntity)null);
+                this.mob.setTarget(null);
                 return false;
             } else {
                 return super.canContinueToUse();
@@ -225,7 +209,7 @@ public class VoidCrawler extends Monster {
 
         @Override
         protected double getAttackReachSqr(LivingEntity pAttackTarget) {
-            return (double)(4.0F + pAttackTarget.getBbWidth());
+            return 4.0F + pAttackTarget.getBbWidth();
         }
     }
 
@@ -255,7 +239,7 @@ public class VoidCrawler extends Monster {
 
         public boolean canUse() {
             float f = this.mob.getBrightness();
-            return f >= 0.5F ? false : super.canUse();
+            return !(f >= 0.5F) && super.canUse();
         }
     }
 }
