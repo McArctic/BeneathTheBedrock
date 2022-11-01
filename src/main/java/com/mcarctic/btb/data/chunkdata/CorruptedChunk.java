@@ -2,6 +2,7 @@ package com.mcarctic.btb.data.chunkdata;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -12,6 +13,8 @@ import java.util.Map;
 public class CorruptedChunk {
 
     private final Map<BlockPos, BlockState> formerStates = new HashMap<>();
+
+    private boolean cleaned = false;
 
     public void addFormerState(BlockPos pos, BlockState state) {
         formerStates.put(pos, state);
@@ -25,23 +28,36 @@ public class CorruptedChunk {
         return formerStates.remove(pos);
     }
 
+    public boolean isCleaned() {
+        return cleaned;
+    }
+
+    public void setCleaned(boolean cleaned) {
+        this.cleaned = cleaned;
+    }
+
     public void saveNBTData(CompoundTag nbt) {
-        var i = 0;
+        var list = new ListTag();
+
         for (var pos : formerStates.keySet()) {
             var tag = new CompoundTag();
 
             tag.put("pos", NbtUtils.writeBlockPos(pos));
             tag.put("state", NbtUtils.writeBlockState(formerStates.get(pos)));
 
-            nbt.put("" + i, tag);
-            i++;
+            list.add(tag);
         }
+        nbt.put("states", list);
+        nbt.putBoolean("cleaned", cleaned);
     }
 
     public void loadNBTData(CompoundTag nbt) {
-        for (var key : nbt.getAllKeys()) {
-            var tag = nbt.getCompound(key);
-            formerStates.put(NbtUtils.readBlockPos(tag.getCompound("pos")), NbtUtils.readBlockState(tag.getCompound("state")));
+        for (var element : nbt.getList("states", 10)) {
+            if (element instanceof CompoundTag compound) {
+                formerStates.put(NbtUtils.readBlockPos(compound.getCompound("pos")), NbtUtils.readBlockState(compound.getCompound("state")));
+            }
         }
+
+        cleaned = nbt.getBoolean("cleaned");
     }
 }

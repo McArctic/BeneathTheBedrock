@@ -15,6 +15,6 @@ public class BTBBlockTagsProvider extends ZytorxBlockTagsProvider {
 
     @Override
     protected void addCustomTags() {
-        tag(BTBBlockTags.NON_CORRUPTIBLES).add(Blocks.AIR, Blocks.BEDROCK, Blocks.WATER, Blocks.VOID_AIR, Blocks.CAVE_AIR, Blocks.LAVA, Blocks.BUBBLE_COLUMN, Blocks.BARRIER, BTBBlocks.DESTABILIZER.getBlock(), BTBBlocks.VOID_FABRIC.getBlock(), BTBBlocks.VOID_FABRIC_NONSPREADABLE.getBlock());
+        tag(BTBBlockTags.NON_CORRUPTIBLES).add(Blocks.AIR, Blocks.BEDROCK, Blocks.VOID_AIR, Blocks.CAVE_AIR, Blocks.LAVA, Blocks.BUBBLE_COLUMN, Blocks.BARRIER, BTBBlocks.DESTABILIZER.getBlock(), BTBBlocks.VOID_FABRIC.getBlock(), BTBBlocks.VOID_FABRIC_NONSPREADABLE.getBlock());
     }
 }

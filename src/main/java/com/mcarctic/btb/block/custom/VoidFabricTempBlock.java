@@ -13,7 +13,6 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -39,7 +38,7 @@ public class VoidFabricTempBlock extends Block {
     }
 
     private static boolean isReplaceable(BlockState state) {
-        return !state.is(BTBBlockTags.NON_CORRUPTIBLES) && !state.is(BTBBlocks.VOID_FABRIC_TEMP.getBlock());
+        return !state.is(BTBBlockTags.NON_CORRUPTIBLES) && state.getBlock().getFluidState(state).isEmpty() && !state.is(BTBBlocks.VOID_FABRIC_TEMP.getBlock());
     }
 
     private static boolean isVoidDimension(Level world) {
@@ -57,19 +56,15 @@ public class VoidFabricTempBlock extends Block {
             return;
         }
 
-        if (!(pProjectile instanceof UncorruptProjectile)) {
-            return;
+        if (pProjectile instanceof UncorruptProjectile) {
+            cure(pLevel, pHit.getBlockPos());
         }
+    }
 
-        var pos = pHit.getBlockPos();
-        if (!pLevel.getBlockState(pos).is(this)) {
-            return;
-        }
-
-
-        if (pLevel.getBlockState(pos).is(this)) {
-            pLevel.getChunkAt(pos).getCapability(CorruptedChunkProvider.CORRUPTED_CHUNK).ifPresent(cap -> {
-                pLevel.setBlockAndUpdate(pos, cap.getAndRemoveFormerState(pos));
+    public void cure(Level level, BlockPos pos) {
+        if (level.getBlockState(pos).is(this)) {
+            level.getChunkAt(pos).getCapability(CorruptedChunkProvider.CORRUPTED_CHUNK).ifPresent(cap -> {
+                level.setBlockAndUpdate(pos, cap.getAndRemoveFormerState(pos));
             });
         }
     }
@@ -85,6 +80,12 @@ public class VoidFabricTempBlock extends Block {
             return;
         }
 
+        var chunk = worldIn.getChunkAt(pos).getCapability(CorruptedChunkProvider.CORRUPTED_CHUNK).orElseThrow(RuntimeException::new);
+        if (chunk.isCleaned()) {
+            cure(worldIn, pos);
+            return;
+        }
+
         for (Direction direction : directions) {
             BlockPos blockPos = pos.relative(direction);
 
@@ -94,17 +95,10 @@ public class VoidFabricTempBlock extends Block {
                     cap.addFormerState(blockPos, formerState);
                 });
 
-                var chunk = worldIn.getChunkAt(blockPos);
-
                 worldIn.setBlockAndUpdate(blockPos, BTBBlocks.VOID_FABRIC_TEMP.getBlock().defaultBlockState());
                 return;
             }
         }
 
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
     }
 }
