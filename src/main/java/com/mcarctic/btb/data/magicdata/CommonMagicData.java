@@ -1,4 +1,4 @@
-﻿package com.mcarctic.btb.data.magicdata;
+package com.mcarctic.btb.data.magicdata;
 
 import com.mcarctic.btb.data.magicdata.model.IMagicType;
 import com.mcarctic.btb.registry.BTBSkills;

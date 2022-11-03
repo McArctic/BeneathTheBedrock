@@ -1,17 +1,19 @@
-﻿package com.mcarctic.btb.data.magicdata;
+package com.mcarctic.btb.data.magicdata;
 
 import com.google.common.reflect.TypeToken;
 import com.mcarctic.btb.data.magicdata.model.IMagicLevel;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.chat.NarratorChatListener;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.registries.GameData;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import net.minecraftforge.registries.IRegistryDelegate;
-import net.minecraftforge.registries.RegistryDelegate;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -20,7 +22,6 @@ public class MagicSkill extends AbstractWidget implements IForgeRegistryEntry<Ma
 
     private final TypeToken<MagicSkill> token = new TypeToken<>(getClass()) {
     };
-    public final IRegistryDelegate<MagicSkill> delegate = new RegistryDelegate<>(this, (Class<MagicSkill>) token.getRawType());
     private final IMagicLevel level;
     private ResourceLocation registryName = null;
 
@@ -30,11 +31,24 @@ public class MagicSkill extends AbstractWidget implements IForgeRegistryEntry<Ma
     }
 
     public MagicSkill(IMagicLevel level, int x, int y) {
-        this(level, x, y, 10, 10);
+        this(level, x, y, 64, 64);
     }
 
     public final void unlock(ServerPlayer player) {
 
+    }
+
+    @Override
+    public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+        setMessage(getDescription());
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderTexture(0, new ResourceLocation("btb", "textures/block/void_fabric.png"));
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, this.alpha);
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.enableDepthTest();
+        this.blit(pPoseStack, this.x, this.y, 64, 64, width, height);
+        this.renderBg(pPoseStack, Minecraft.getInstance(), pMouseX, pMouseY);
     }
 
     public TranslatableComponent getTitle() {
@@ -59,7 +73,6 @@ public class MagicSkill extends AbstractWidget implements IForgeRegistryEntry<Ma
 
     @Nullable
     public final ResourceLocation getRegistryName() {
-        if (delegate.name() != null) return delegate.name();
         return registryName != null ? registryName : null;
     }
 
@@ -71,7 +84,6 @@ public class MagicSkill extends AbstractWidget implements IForgeRegistryEntry<Ma
         return this;
     }
 
-    //Helper functions
     public final MagicSkill setRegistryName(ResourceLocation name) {
         return setRegistryName(name.toString());
     }
@@ -80,13 +92,6 @@ public class MagicSkill extends AbstractWidget implements IForgeRegistryEntry<Ma
         return (Class<MagicSkill>) token.getRawType();
     }
 
-    /**
-     * This will assert that the registry name is valid and warn about potential registry overrides
-     * It is important as it detects cases where modders unintentionally register objects with the "minecraft" namespace, leading to dangerous errors later.
-     *
-     * @param name The registry name
-     * @return A verified "correct" registry name
-     */
     ResourceLocation checkRegistryName(String name) {
         return GameData.checkPrefix(name, true);
     }

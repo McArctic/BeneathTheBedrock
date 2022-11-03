@@ -1,4 +1,4 @@
-﻿package com.mcarctic.btb.data.magicdata.model;
+package com.mcarctic.btb.data.magicdata.model;
 
 public interface IMagicType {
     boolean is(IMagicType type);

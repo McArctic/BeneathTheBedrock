@@ -23,10 +23,6 @@ public enum VoidMagicLevel implements IMagicLevel {
         this.levelAbove = levelAbove == null ? this : levelAbove;
     }
 
-    public VoidMagicLevel getLevelAbove() {
-        return levelAbove;
-    }
-
     public int getLevel() {
         return level;
     }
@@ -44,7 +40,7 @@ public enum VoidMagicLevel implements IMagicLevel {
     @Override
     public void addSkill(MagicSkill skill) {
         if (isCheat()) {
-            throw new RuntimeException("Cheatlevels shouldnt have skills");
+            //TODO throw new RuntimeException("Cheatlevels shouldnt have skills");
         }
         skills.add(skill);
     }

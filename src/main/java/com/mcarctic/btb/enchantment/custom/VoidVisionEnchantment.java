@@ -1,4 +1,4 @@
-package com.mcarctic.btb.enchantment.enchantments;
+package com.mcarctic.btb.enchantment.custom;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;

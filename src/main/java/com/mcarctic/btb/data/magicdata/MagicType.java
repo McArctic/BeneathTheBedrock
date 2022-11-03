@@ -1,4 +1,4 @@
-﻿package com.mcarctic.btb.data.magicdata;
+package com.mcarctic.btb.data.magicdata;
 
 import com.mcarctic.btb.BeneathTheBedrock;
 import com.mcarctic.btb.data.magicdata.model.IMagicLevel;

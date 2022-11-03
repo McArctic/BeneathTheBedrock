@@ -2,7 +2,7 @@ package com.mcarctic.btb;
 
 import com.mcarctic.btb.block.model.TieredVoidBlockModelLoader;
 import com.mcarctic.btb.data.magicdata.CommonMagicData;
-import com.mcarctic.btb.enchantment.BTBEnchantments;
+import com.mcarctic.btb.registry.BTBEnchantments;
 import com.mcarctic.btb.entity.renderer.UncorruptProjectileRenderer;
 import com.mcarctic.btb.entity.renderer.VoidCrawlerRenderer;
 import com.mcarctic.btb.networking.BTBNetworkMessages;
@@ -47,6 +47,7 @@ public class BeneathTheBedrock {
         BTBEnchantments.register(eventBus);
         BTBDimensions.register();
         BTBStructures.register(eventBus);
+        BTBSkills.register(eventBus);
 
 
         eventBus.addListener(TieredVoidBlockModelLoader::register);

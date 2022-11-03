@@ -1,7 +1,7 @@
-package com.mcarctic.btb.enchantment;
+package com.mcarctic.btb.registry;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.enchantment.enchantments.VoidVisionEnchantment;
+import com.mcarctic.btb.enchantment.custom.VoidVisionEnchantment;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
