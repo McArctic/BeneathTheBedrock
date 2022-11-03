@@ -1,10 +1,10 @@
 package com.mcarctic.btb.events;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.data.VoidMagicLevel;
 import com.mcarctic.btb.data.chunkdata.CorruptedChunkProvider;
-import com.mcarctic.btb.data.playerdata.PlayerMagicLevel;
-import com.mcarctic.btb.data.playerdata.PlayerMagicLevelProvider;
+import com.mcarctic.btb.data.magicdata.VoidMagicLevel;
+import com.mcarctic.btb.data.playerdata.MagicData;
+import com.mcarctic.btb.data.playerdata.MagicDataProvider;
 import com.mcarctic.btb.registry.BTBDimensions;
 import com.mcarctic.btb.util.CapabilityHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -38,10 +38,10 @@ public class BTBDataEvents {
             return;
         }
 
-        if (!player.getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).isPresent()) {
-            event.addCapability(new ResourceLocation(BeneathTheBedrock.MOD_ID, "voidmagic"), new PlayerMagicLevelProvider());
+        if (!player.getCapability(MagicDataProvider.MAGIC_DATA).isPresent()) {
+            event.addCapability(new ResourceLocation(BeneathTheBedrock.MOD_ID, "voidmagic"), new MagicDataProvider());
         }
-        player.getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).ifPresent(cap -> cap.update(player));
+        player.getCapability(MagicDataProvider.MAGIC_DATA).ifPresent(cap -> cap.update(player));
     }
 
     @SubscribeEvent
@@ -49,9 +49,9 @@ public class BTBDataEvents {
 
         event.getOriginal().reviveCaps();
 
-        event.getOriginal().getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).ifPresent(
+        event.getOriginal().getCapability(MagicDataProvider.MAGIC_DATA).ifPresent(
                 oldPlayer ->
-                        event.getOriginal().getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).ifPresent(newPlayer -> {
+                        event.getOriginal().getCapability(MagicDataProvider.MAGIC_DATA).ifPresent(newPlayer -> {
                             newPlayer.copyFrom(oldPlayer);
                             if (event.getPlayer() instanceof ServerPlayer player) {
                                 newPlayer.update(player);
@@ -62,7 +62,7 @@ public class BTBDataEvents {
 
     @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
-        event.register(PlayerMagicLevel.class);
+        event.register(MagicData.class);
     }
 
     @SubscribeEvent

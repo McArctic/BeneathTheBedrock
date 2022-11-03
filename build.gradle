@@ -13,6 +13,7 @@ plugins {
     id 'eclipse'
     id 'maven-publish'
 }
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
@@ -20,7 +21,10 @@ version = '1.18.2-1.0'
 group = 'com.mcarctic.btb' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'btb'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {

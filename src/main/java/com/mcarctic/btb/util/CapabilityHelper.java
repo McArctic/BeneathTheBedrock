@@ -1,17 +1,17 @@
 package com.mcarctic.btb.util;
 
-import com.mcarctic.btb.data.VoidMagicLevel;
-import com.mcarctic.btb.data.playerdata.PlayerMagicLevelProvider;
+import com.mcarctic.btb.data.magicdata.model.IMagicLevel;
+import com.mcarctic.btb.data.playerdata.MagicDataProvider;
 import net.minecraft.server.level.ServerPlayer;
 
 public class CapabilityHelper {
 
     public static void updateAll(ServerPlayer player) {
-        player.getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL).ifPresent(cap -> cap.update(player));
+        player.getCapability(MagicDataProvider.MAGIC_DATA).ifPresent(cap -> cap.update(player));
     }
 
-    public static VoidMagicLevel getMagicLevel(ServerPlayer player) {
-        var cap = player.getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL);
+    public static IMagicLevel getMagicLevel(ServerPlayer player) {
+        var cap = player.getCapability(MagicDataProvider.MAGIC_DATA);
         if (!cap.isPresent()) {
             throw new RuntimeException();
         }
@@ -24,8 +24,8 @@ public class CapabilityHelper {
         return optional.get().getLevel();
     }
 
-    public static void setMagicLevel(ServerPlayer player, VoidMagicLevel level) {
-        var cap = player.getCapability(PlayerMagicLevelProvider.PLAYER_MAGIC_LEVEL);
+    public static void setMagicLevel(ServerPlayer player, IMagicLevel level) {
+        var cap = player.getCapability(MagicDataProvider.MAGIC_DATA);
         if (!cap.isPresent()) {
             throw new RuntimeException();
         }

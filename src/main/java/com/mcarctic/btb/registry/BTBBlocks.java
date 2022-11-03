@@ -1,8 +1,9 @@
 package com.mcarctic.btb.registry;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.block.custom.*;
-import com.mcarctic.btb.data.VoidMagicLevel;
+import com.mcarctic.btb.block.custom.DestabilizerBlock;
+import com.mcarctic.btb.block.custom.VoidFabricBlock;
+import com.mcarctic.btb.block.custom.VoidFabricNonSpreadableBlock;
 import com.mcarctic.btb.item.BTBItemGroup;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -21,16 +22,6 @@ public class BTBBlocks {
     public static final RegisteredBlock VOID_FABRIC = registerBlock("void_fabric",
             VoidFabricBlock::new, BTBItemGroup.VOID_GROUP);
 
-    @EnglishName(name = "Void Fabric Wood")
-    @BlockDefinition(toolTypes = {ToolType.PICKAXE}, hasCustomModel = true)
-    public static final RegisteredBlock VOID_FABRIC_WOOD = registerBlock("void_fabric_wood",
-            () -> new TieredVoidBlock(VoidMagicLevel.CORRUPTED), BTBItemGroup.VOID_GROUP);
-
-    @EnglishName(name = "Void Fabric Planks")
-    @BlockDefinition(toolTypes = {ToolType.PICKAXE}, hasCustomModel = true)
-    public static final RegisteredBlock VOID_FABRIC_PLANKS = registerBlock("void_fabric_planks",
-            () -> new TieredVoidBlock(VoidMagicLevel.CHEAT), BTBItemGroup.VOID_GROUP);
-
     @EnglishName(name = "Void Fabric")
     @BlockDefinition(toolTypes = {ToolType.PICKAXE}, hasItem = false, hasCustomModel = true, hasSpecialDrop = true)
     public static final RegisteredBlock VOID_FABRIC_NONSPREADABLE = registerBlock("void_fabric_nonspreadable",
@@ -40,11 +31,6 @@ public class BTBBlocks {
     @BlockDefinition(toolTypes = {ToolType.PICKAXE}, hasCustomModel = true)
     public static final RegisteredBlock DESTABILIZER = registerBlock("destabilizer",
             DestabilizerBlock::new);
-
-    @EnglishName(name = "Void Fabric Temp")
-    @BlockDefinition(toolTypes = {ToolType.PICKAXE}, hasCustomModel = true)
-    public static final RegisteredBlock VOID_FABRIC_TEMP = registerBlock("void_fabric_temp",
-            VoidFabricTempBlock::new, BTBItemGroup.VOID_GROUP);
 
 
     private static RegisteredBlock registerBlock(String name, Supplier<Block> block, CreativeModeTab tab) {

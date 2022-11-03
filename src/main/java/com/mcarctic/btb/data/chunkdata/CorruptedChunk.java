@@ -16,6 +16,8 @@ public class CorruptedChunk {
 
     private boolean cleaned = false;
 
+    private boolean noSpread = false;
+
     public void addFormerState(BlockPos pos, BlockState state) {
         formerStates.put(pos, state);
     }
@@ -59,5 +61,13 @@ public class CorruptedChunk {
         }
 
         cleaned = nbt.getBoolean("cleaned");
+    }
+
+    public boolean isNoSpread() {
+        return noSpread;
+    }
+
+    public void setNoSpread(boolean noSpread) {
+        this.noSpread = noSpread;
     }
 }

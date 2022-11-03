@@ -1,10 +1,12 @@
 package com.mcarctic.btb.registry;
 
 import com.mcarctic.btb.BeneathTheBedrock;
+import com.mcarctic.btb.data.magicdata.MagicType;
 import com.mcarctic.btb.item.BTBItemGroup;
 import com.mcarctic.btb.item.custom.BTBSpawnEggItem;
 import com.mcarctic.btb.item.custom.ClearingGunItem;
 import com.mcarctic.btb.item.custom.DestabilizerBlockItem;
+import com.mcarctic.btb.item.custom.SkillTreeBook;
 import net.minecraft.world.item.Item;
 import net.zytorx.library.datagen.reflection.annotations.EnglishName;
 import net.zytorx.library.datagen.reflection.annotations.ItemDefinition;
@@ -14,11 +16,6 @@ import net.zytorx.library.registry.Registrar;
 import java.util.function.Supplier;
 
 public class BTBItems {
-
-    @EnglishName(name = "Bedrock Pickaxe")
-    @ItemDefinition(isTool = true)
-    public static final RegisteredItem BEDROCK_PICKAXE = registerItem("bedrock_pickaxe",
-            () -> new Item(new Item.Properties().tab(BTBItemGroup.VOID_GROUP)));
 
     @EnglishName(name = "Void Crawler Spawn Egg")
     @ItemDefinition(hasCustomModel = true)
@@ -30,6 +27,11 @@ public class BTBItems {
     public static final RegisteredItem DESTABILIZER_BLOCK_ITEM = registerItem("destabilizer",
             () -> new DestabilizerBlockItem(BTBBlocks.DESTABILIZER.getBlock(),
                     new Item.Properties().tab(BTBItemGroup.VOID_GROUP)));
+
+    @EnglishName(name = "Journal of §kNotch")
+    @ItemDefinition(isTool = true)
+    public static final RegisteredItem VOIDLING_JOURNAL = registerItem("voidling_journal",
+            () -> new SkillTreeBook(new Item.Properties().tab(BTBItemGroup.VOID_GROUP), MagicType.VOIDLING));
 
     @EnglishName(name = "Clearing Gun")
     @ItemDefinition(isTool = true)

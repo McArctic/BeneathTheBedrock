@@ -1,7 +1,7 @@
 package com.mcarctic.btb.block.custom;
 
-import com.mcarctic.btb.data.VoidMagicLevel;
-import com.mcarctic.btb.data.playerdata.ClientPlayerMagicLevel;
+import com.mcarctic.btb.data.magicdata.VoidMagicLevel;
+import com.mcarctic.btb.data.playerdata.ClientMagicData;
 import com.mcarctic.btb.registry.BTBBlocks;
 import com.mcarctic.btb.util.CapabilityHelper;
 import net.minecraft.core.BlockPos;
@@ -34,8 +34,8 @@ public class TieredVoidBlock extends Block {
     }
 
     public boolean canPlayerSee() {
-
-        return ClientPlayerMagicLevel.getMagicLevel().getLevel() >= neededLevel.getLevel();
+        var level = ClientMagicData.getMagicLevel();
+        return level.getType().is(neededLevel.getType()) && (level.isCheat() || level.getLevel() >= neededLevel.getLevel());
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.mcarctic.btb.networking;
 
 import com.mcarctic.btb.BeneathTheBedrock;
-import com.mcarctic.btb.networking.sync.VoidMagicLevelDataSyncS2CPacket;
+import com.mcarctic.btb.networking.sync.MagicDataSyncS2CPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -29,10 +29,10 @@ public class BTBNetworkMessages {
 
         INSTANCE = net;
 
-        net.messageBuilder(VoidMagicLevelDataSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(VoidMagicLevelDataSyncS2CPacket::new)
-                .encoder(VoidMagicLevelDataSyncS2CPacket::toBytes)
-                .consumer(VoidMagicLevelDataSyncS2CPacket::handle)
+        net.messageBuilder(MagicDataSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(MagicDataSyncS2CPacket::new)
+                .encoder(MagicDataSyncS2CPacket::toBytes)
+                .consumer(MagicDataSyncS2CPacket::handle)
                 .add();
     }
 

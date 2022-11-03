@@ -27,8 +27,13 @@ public class BTBSpawnEggItem extends SpawnEggItem {
     public BTBSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier,
                            int primaryColorIn, int secondaryColorIn, Properties builder) {
         super(null, primaryColorIn, secondaryColorIn, builder);
-        this.entityTypeSupplier = Lazy.of(entityTypeSupplier::get);
+        this.entityTypeSupplier = Lazy.of(entityTypeSupplier);
         UNADDED_EGGS.add(this);
+    }
+
+    @Override
+    public EntityType<?> getType(@Nullable CompoundTag pNbt) {
+        return this.entityTypeSupplier.get();
     }
 
     public static void initSpawnEggs() {
@@ -53,10 +58,5 @@ public class BTBSpawnEggItem extends SpawnEggItem {
         }
 
         UNADDED_EGGS.clear();
-    }
-
-    @Override
-    public EntityType<?> getType(@Nullable CompoundTag pNbt) {
-        return this.entityTypeSupplier.get();
     }
 }

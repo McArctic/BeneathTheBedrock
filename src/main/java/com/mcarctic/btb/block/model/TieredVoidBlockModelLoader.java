@@ -27,10 +27,6 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class TieredVoidBlockModelLoader implements IModelLoader<TieredVoidBlockModelLoader.ModelGeometry> {
-    public static void register(ModelRegistryEvent event) {
-        ModelLoaderRegistry.registerLoader(new ResourceLocation(BeneathTheBedrock.MOD_ID, "tieredloader"), new TieredVoidBlockModelLoader());
-    }
-
     @Override
     public ModelGeometry read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {
         return new ModelGeometry(deserializationContext, modelContents);
@@ -39,6 +35,10 @@ public class TieredVoidBlockModelLoader implements IModelLoader<TieredVoidBlockM
     @Override
     public void onResourceManagerReload(ResourceManager pResourceManager) {
 
+    }
+
+    public static void register(ModelRegistryEvent event) {
+        ModelLoaderRegistry.registerLoader(new ResourceLocation(BeneathTheBedrock.MOD_ID, "tieredloader"), new TieredVoidBlockModelLoader());
     }
 
     public static class ModelGeometry implements IModelGeometry<ModelGeometry> {

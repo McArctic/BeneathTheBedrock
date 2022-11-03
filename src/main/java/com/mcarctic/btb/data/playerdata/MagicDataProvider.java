@@ -1,4 +1,4 @@
-package com.mcarctic.btb.data.chunkdata;
+package com.mcarctic.btb.data.playerdata;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -10,39 +10,40 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CorruptedChunkProvider implements ICapabilitySerializable<CompoundTag> {
+public class MagicDataProvider implements ICapabilitySerializable<CompoundTag> {
 
-    public static Capability<CorruptedChunk> CORRUPTED_CHUNK = CapabilityManager.get(new CapabilityToken<>() {
+    public static Capability<MagicData> MAGIC_DATA = CapabilityManager.get(new CapabilityToken<>() {
     });
-    private CorruptedChunk corruptedChunk;
-    private final LazyOptional<CorruptedChunk> optional = LazyOptional.of(this::getCorruptedChunk);
+    private MagicData voidlingData = null;
+    private final LazyOptional<MagicData> optional = LazyOptional.of(this::getVoidlingData);
 
-    private CorruptedChunk getCorruptedChunk() {
-        if (corruptedChunk == null) {
-            corruptedChunk = new CorruptedChunk();
+    private MagicData getVoidlingData() {
+        if (voidlingData == null) {
+            voidlingData = new MagicData();
         }
-        return corruptedChunk;
+        return voidlingData;
     }
 
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
 
-        if (cap == CORRUPTED_CHUNK) {
+        if (cap == MAGIC_DATA) {
             return optional.cast();
         }
 
         return LazyOptional.empty();
     }
 
+    @Override
     public CompoundTag serializeNBT() {
         var nbt = new CompoundTag();
-        getCorruptedChunk().saveNBTData(nbt);
+        getVoidlingData().saveNBTData(nbt);
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
-        getCorruptedChunk().loadNBTData(nbt);
+        getVoidlingData().loadNBTData(nbt);
     }
 }

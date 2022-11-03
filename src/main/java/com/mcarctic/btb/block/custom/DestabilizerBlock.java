@@ -1,8 +1,8 @@
 package com.mcarctic.btb.block.custom;
 
-import com.mcarctic.btb.init.VoidTeleporter;
 import com.mcarctic.btb.registry.BTBBlockEntities;
 import com.mcarctic.btb.registry.BTBDimensions;
+import com.mcarctic.btb.world.VoidTeleporter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -28,11 +28,6 @@ public class DestabilizerBlock extends BaseEntityBlock {
                 .strength(15f)
                 .sound(SoundType.STONE)
                 .noOcclusion());
-    }
-
-    private static ServerLevel getDestinationLevel(MinecraftServer server, Level currentLevel) {
-        var destination = currentLevel.dimension() == BTBDimensions.VOID ? Level.OVERWORLD : BTBDimensions.VOID;
-        return server.getLevel(destination);
     }
 
     @Nullable
@@ -62,6 +57,11 @@ public class DestabilizerBlock extends BaseEntityBlock {
 
         return InteractionResult.SUCCESS;
 
+    }
+
+    private static ServerLevel getDestinationLevel(MinecraftServer server, Level currentLevel) {
+        var destination = currentLevel.dimension() == BTBDimensions.VOID ? Level.OVERWORLD : BTBDimensions.VOID;
+        return server.getLevel(destination);
     }
 }
 

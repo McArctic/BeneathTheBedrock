@@ -1,4 +1,4 @@
-package com.mcarctic.btb.init;
+package com.mcarctic.btb.world;
 
 import com.mcarctic.btb.block.custom.DestabilizerBlock;
 import com.mcarctic.btb.registry.BTBBlocks;
@@ -61,7 +61,6 @@ public class VoidTeleporter implements ITeleporter {
 
 
         lastPos = thisPos;
-        System.out.println("LAST POS : " + lastPos);
         return entity;
 
     }

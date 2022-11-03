@@ -50,6 +50,66 @@ public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
         this.transforms = transforms;
     }
 
+    @NotNull
+    @Override
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
+        init();
+
+        return getTextured(side, getTexture());
+    }
+
+    private TextureAtlasSprite getTexture() {
+        if (block == null || !block.canPlayerSee()) {
+            return FALLBACK;
+        }
+        return texture;
+    }
+
+    private void init() {
+        if (FALLBACK == null) {
+            var location = BTBBlocks.VOID_FABRIC.getBlock().getRegistryName();
+            FALLBACK = getTexture(new ResourceLocation(location.getNamespace(), "block/" + location.getPath()));
+        }
+        if (texture == null) {
+            texture = getTexture(location);
+        }
+    }
+
+    @Override
+    public boolean useAmbientOcclusion() {
+        return true;
+    }
+
+    @Override
+    public boolean isGui3d() {
+        return true;
+    }
+
+    @Override
+    public boolean usesBlockLight() {
+        return false;
+    }
+
+    @Override
+    public boolean isCustomRenderer() {
+        return false;
+    }
+
+    @Override
+    public TextureAtlasSprite getParticleIcon() {
+        return getTexture();
+    }
+
+    @Override
+    public ItemOverrides getOverrides() {
+        return ItemOverrides.EMPTY;
+    }
+
+    @Override
+    public ItemTransforms getTransforms() {
+        return this.transforms;
+    }
+
     public static TextureAtlasSprite getTexture(ResourceLocation resource) {
         return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(resource);
     }
@@ -118,65 +178,5 @@ public class TieredVoidBlockBakedModel implements IDynamicBakedModel {
                     builder.put(e);
             }
         }
-    }
-
-    @NotNull
-    @Override
-    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        init();
-
-        return getTextured(side, getTexture());
-    }
-
-    private TextureAtlasSprite getTexture() {
-        if (block == null || !block.canPlayerSee()) {
-            return FALLBACK;
-        }
-        return texture;
-    }
-
-    private void init() {
-        if (FALLBACK == null) {
-            var location = BTBBlocks.VOID_FABRIC.getBlock().getRegistryName();
-            FALLBACK = getTexture(new ResourceLocation(location.getNamespace(), "block/" + location.getPath()));
-        }
-        if (texture == null) {
-            texture = getTexture(location);
-        }
-    }
-
-    @Override
-    public boolean useAmbientOcclusion() {
-        return true;
-    }
-
-    @Override
-    public boolean isGui3d() {
-        return true;
-    }
-
-    @Override
-    public boolean usesBlockLight() {
-        return false;
-    }
-
-    @Override
-    public boolean isCustomRenderer() {
-        return false;
-    }
-
-    @Override
-    public TextureAtlasSprite getParticleIcon() {
-        return getTexture();
-    }
-
-    @Override
-    public ItemOverrides getOverrides() {
-        return ItemOverrides.EMPTY;
-    }
-
-    @Override
-    public ItemTransforms getTransforms() {
-        return this.transforms;
     }
 }

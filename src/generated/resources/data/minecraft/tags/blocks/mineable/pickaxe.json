@@ -2,10 +2,7 @@
   "replace": false,
   "values": [
     "btb:void_fabric",
-    "btb:void_fabric_wood",
-    "btb:void_fabric_planks",
     "btb:void_fabric_nonspreadable",
-    "btb:destabilizer",
-    "btb:void_fabric_temp"
+    "btb:destabilizer"
   ]
 }
